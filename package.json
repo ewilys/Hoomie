@@ -1,8 +1,8 @@
 {
-  "name": "react-native-boilerplate",
+  "name": "Hoomie",
   "version": "0.0.0",
-  "description": "Hello Expo!",
-  "author": "bkdev",
+  "description": "The Hoomie App - Monitor day after day your energy consumption",
+  "author": "hoomie_project",
   "private": true,
   "main": "main.js",
   "dependencies": {
