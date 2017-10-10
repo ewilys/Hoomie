@@ -31,7 +31,7 @@ const AppMainTab = TabNavigator({
         <FontAwesome name="home" size={23} color={tintColor} />
       ),
       headerStyle: {
-        backgroundColor: colors.PINK_100,
+        backgroundColor: colors.BLUE_100,
       },
       headerTitle: 'Sweet Home',
       headerTitleStyle: {
@@ -52,7 +52,7 @@ const AppMainTab = TabNavigator({
         <FontAwesome name="heartbeat" size={23} color={tintColor} />
       ),
       headerStyle: {
-        backgroundColor: colors.PINK_100,
+        backgroundColor: colors.BLUE_100,
       },
       headerTitle: 'Favorites',
       headerTitleStyle: {
@@ -73,7 +73,7 @@ const AppMainTab = TabNavigator({
         <FontAwesome name="user-circle" size={23} color={tintColor} />
       ),
       headerStyle: {
-        backgroundColor: colors.PINK_100,
+        backgroundColor: colors.BLUE_100,
       },
       headerTitle: 'Profile',
       headerTitleStyle: {
@@ -86,16 +86,16 @@ const AppMainTab = TabNavigator({
 }, {
   tabBarOptions: {
     activeTintColor: colors.WHITE,
-    inactiveTintColor: colors.PINK_50,
-    inactiveBackgroundColor: colors.PINK_100,
-    activeBackgroundColor: colors.PINK_100,
+    inactiveTintColor: colors.BLUE_50,
+    inactiveBackgroundColor: colors.BLUE_100,
+    activeBackgroundColor: colors.BLUE_100,
     showIcon: true,
     showLabel: Platform.OS === 'ios',
     indicatorStyle: {
-      backgroundColor: colors.PINK_300,
+      backgroundColor: colors.BLUE_300,
     },
     style: {
-      backgroundColor: colors.PINK_100,
+      backgroundColor: colors.BLUE_100,
     },
     upperCaseLabel: false,
   },
@@ -109,7 +109,7 @@ const AppMainStack = StackNavigator({
   Settings: { screen: SettingsScreen },
 }, {
   cardStyle: {
-    backgroundColor: colors.PINK_50,
+    backgroundColor: colors.BLUE_50,
   },
   mode: 'modal',
 });
@@ -126,7 +126,7 @@ const AppDrawer = DrawerNavigator({
         <Ionicons name="md-settings" size={23} color={tintColor} />
       ),
       headerStyle: {
-        backgroundColor: colors.PINK_100,
+        backgroundColor: colors.BLUE_100,
       },
       headerTitle: 'Settings',
       headerTitleStyle: {
@@ -141,9 +141,9 @@ const AppDrawer = DrawerNavigator({
       {...props}
     />),
   contentOptions: {
-    activeBackgroundColor: colors.PINK_100,
+    activeBackgroundColor: colors.BLUE_100,
     activeTintColor: colors.WHITE,
-    inactiveTintColor: colors.PINK_200,
+    inactiveTintColor: colors.BLUE_200,
   },
 });
 
