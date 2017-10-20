@@ -5,7 +5,7 @@ class TemperatureView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: "20"
+            value: "-1"
         }
     }
 
