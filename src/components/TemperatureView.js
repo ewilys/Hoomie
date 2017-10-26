@@ -3,7 +3,7 @@
  **/
 
 /* eslint-disable no-unused-vars */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {Text} from "react-native";
 
 class TemperatureView extends Component {
@@ -11,9 +11,9 @@ class TemperatureView extends Component {
         super(props);
     } */
 
-    static propTypes = {
-        temperatures: PropTypes.string
-    };
+    // static propTypes = {
+    //     temperatures: PropTypes.string
+    // };
 
     render() {
         return (

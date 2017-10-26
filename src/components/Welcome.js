@@ -16,7 +16,7 @@ const TitleText = styled.Text`
 
 const ButtonContainer = styled.View`
   top: 100;
-`
+`;
 
 class WelcomeScreen extends Component {
   render() {

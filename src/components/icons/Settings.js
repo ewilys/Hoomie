@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const IconRightContainer = styled.TouchableOpacity`
   height: 100%;
@@ -8,10 +8,10 @@ const IconRightContainer = styled.TouchableOpacity`
   justifyContent: center;
 `;
 
-const Settings = ({ onPress }) => (
-  <IconRightContainer onPress={onPress}>
-    <Ionicons name="md-settings" size={25} color="white" />
-  </IconRightContainer>
+const Settings = ({onPress}) => (
+    <IconRightContainer onPress={onPress}>
+        <Ionicons name="md-settings" size={25} color="white"/>
+    </IconRightContainer>
 );
 
 export default Settings;

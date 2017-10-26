@@ -1,9 +1,9 @@
 import Back from './Back';
-import Hamburger from './Hamburger';
 import Settings from './Settings';
+import Hamburger from './Hamburger'
 
 export {
-  Back as BackIcon,
-  Hamburger as HamburgerIcon,
-  Settings as SettingsIcon,
+    Back as BackIcon,
+    Hamburger as HamburgerIcon,
+    Settings as SettingsIcon,
 };

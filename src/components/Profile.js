@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components/native';
 
 const ContainerView = styled.View`
@@ -13,13 +13,13 @@ const TitleText = styled.Text`
 `;
 
 class ProfileScreen extends Component {
-  render() {
-    return (
-      <ContainerView>
-        <TitleText>Profile</TitleText>
-      </ContainerView>
-    );
-  }
+    render() {
+        return (
+            <ContainerView>
+                <TitleText>Profile</TitleText>
+            </ContainerView>
+        );
+    }
 }
 
 export default ProfileScreen;

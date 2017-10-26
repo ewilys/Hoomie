@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components/native';
 
 
@@ -14,13 +14,13 @@ const TitleText = styled.Text`
 `;
 
 class FavoritesScreen extends Component {
-  render() {
-    return (
-      <ContainerView>
-        <TitleText>Favorites</TitleText>
-      </ContainerView>
-    );
-  }
+    render() {
+        return (
+            <ContainerView>
+                <TitleText>Favorites</TitleText>
+            </ContainerView>
+        );
+    }
 }
 
 export default FavoritesScreen;

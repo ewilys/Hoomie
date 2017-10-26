@@ -1,5 +1,5 @@
 import React from 'react';
-import { DrawerItems } from 'react-navigation';
+import {DrawerItems} from 'react-navigation';
 import styled from 'styled-components/native';
 
 import Button from './Button';
@@ -37,19 +37,19 @@ const ButtonContainer = styled.View`
 `;
 
 const CustomDrawerContent = (props) => (
-  <ContainerView>
-    <DrawerContainer>
-      <AvatarContainer>
-        <Avatar />
-      </AvatarContainer>
-      <ItemContainer>
-        <DrawerItems {...props} />
-      </ItemContainer>
-    </DrawerContainer>
-    <ButtonContainer>
-      <Button text="Logout" onPress={() => props.navigation.navigate('Welcome')} />
-    </ButtonContainer>
-  </ContainerView>
+    <ContainerView>
+        <DrawerContainer>
+            <AvatarContainer>
+                <Avatar/>
+            </AvatarContainer>
+            <ItemContainer>
+                <DrawerItems {...props} />
+            </ItemContainer>
+        </DrawerContainer>
+        <ButtonContainer>
+            <Button text="Logout" onPress={() => props.navigation.navigate('Welcome')}/>
+        </ButtonContainer>
+    </ContainerView>
 );
 
 export default CustomDrawerContent;
