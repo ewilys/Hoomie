@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 import React, { Component } from 'react';
 import styled from 'styled-components/native';
-import TemperatureView from "../components/TemperatureView";
-import Button from "../components/Button";
+
+import { Button } from './index';
 
 const ContainerView = styled.View`
   flex: 1;
@@ -15,14 +14,21 @@ const TitleText = styled.Text`
   color: ${props => props.theme.WHITE};
 `;
 
-class HomeScreen extends Component {
+const ButtonContainer = styled.View`
+  top: 100;
+`
+
+class WelcomeScreen extends Component {
   render() {
     return (
       <ContainerView>
-        <TemperatureView/>
+        <TitleText>Welcome</TitleText>
+        <ButtonContainer>
+          <Button text="Go to main" onPress={() => this.props.navigation.navigate('Main')} />
+        </ButtonContainer>
       </ContainerView>
     );
   }
 }
 
-export default HomeScreen;
+export default WelcomeScreen;

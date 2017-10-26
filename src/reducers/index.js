@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 
-import auth from './auth';
+import getTemp from './getTemp';
 
 export default combineReducers({
-  auth,
+    getTemp
 });

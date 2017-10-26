@@ -7,11 +7,11 @@ import {
 } from 'react-navigation';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 
-import WelcomeScreen from './screens/Welcome';
-import HomeScreen from './screens/Home';
-import ProfileScreen from './screens/Profile';
-import FavoritesScreen from './screens/Favorites';
-import SettingsScreen from './screens/Settings';
+import WelcomeScreen from './components/Welcome';
+import HomeScreen from './components/Home';
+import ProfileScreen from './components/Profile';
+import FavoritesScreen from './components/Favorites';
+import SettingsScreen from './components/Settings';
 
 import { HamburgerIcon, SettingsIcon, BackIcon } from './components/icons';
 
