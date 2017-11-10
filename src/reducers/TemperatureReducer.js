@@ -6,12 +6,11 @@ import { serverIp, serverPort } from '../utils/constants'
 
 const initialState = {temperatures: "-1"};
 
-export default function getTemperatures(state = initialState, action) {
-    const fetchingAddress = `http://${serverIp}:${serverPort}/temperature`;
+export default function getValues(state = initialState, action) {
+    const fetchingAddress = `http://${serverIp}:${serverPort}/temperature/last`;
     let data;
-
     switch (action.type) {
-        case 'TEMPERATURES_ARRAY':
+        case 'REFRESH_VALUES':
             data = fetch(fetchingAddress, {
                     method: 'GET',
                     headers: {
@@ -19,17 +18,19 @@ export default function getTemperatures(state = initialState, action) {
                     }
                 })
                 .then((temperatureValue) => {
-                    console.log(temperatureValue._bodyText.split(":")[2].split("}")[0]);
                     if(temperatureValue) {
-
-                        return temperatureValue._bodyText.split(":")[2].split("}")[0];
+                        console.log(temperatureValue);
+                        return temperatureValue._bodyText;
+                    }
+                    else {
+                        console.log("Issue with the server response")
                     }
                 })
                 .catch((error) => {
                     console.error(error);
                 });
             return Object.assign({}, state, {
-                temperatures: data
+                temperatures: data.toString()
             });
         default:
             return state

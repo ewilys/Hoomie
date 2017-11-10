@@ -1,1 +1,1 @@
-export * from './getTemp';
+export * from './TemperatureActions';

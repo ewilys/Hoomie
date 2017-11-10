@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 
-import getTemp from './getTemp';
+import TemperatureReducer from './TemperatureReducer';
 
 export default combineReducers({
-    getTemp
+    TemperatureReducer
 });

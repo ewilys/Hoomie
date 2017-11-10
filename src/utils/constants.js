@@ -8,5 +8,5 @@ export const colors = {
   BLUE_500: '#2430ff',
 };
 
-export const serverIp = "192.168.0.27";
+export const serverIp = "192.168.0.26";
 export const serverPort = "8080";

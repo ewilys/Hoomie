@@ -4,15 +4,14 @@ import * as actions from '../actions'
 import TemperatureView from "../components/TemperatureView";
 
 const mapStateToProps = state => {
-    console.log(state.getTemp.temperatures);
     return {
-        temperatures: state.getTemp.temperatures
+        temperatures: state.TemperatureReducer.temperatures
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getTemperatures: () => dispatch(actions.getTemperatures())
+        getValues: () => dispatch(actions.getValues())
     }
 };
 
