@@ -1,17 +1,19 @@
 /* eslint-disable arrow-body-style */
 import { connect } from 'react-redux'
-import * as actions from '../actions'
+import { itemsFetchData } from '../actions'
 import TemperatureView from "../components/TemperatureView";
 
 const mapStateToProps = state => {
     return {
-        temperatures: state.TemperatureReducer.temperatures
+        items: state.getItems,
+        hasErrored: state.itemsHaveErrored,
+        isLoading: state.itemsAreLoading
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getValues: () => dispatch(actions.getValues())
+        getLast: (subparameters) => dispatch(itemsFetchData('/temperature/last'))
     }
 };
 

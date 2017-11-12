@@ -12,24 +12,26 @@ class TemperatureView extends Component {
     }
 
     componentDidMount() {
-        this.props.getValues();
+        this.props.getLast();
     }
 
     render() {
         return (
             <View>
                 <Text>
-                    {this.props.temperatures && this.props.temperatures !== '-1' ? this.props.temperatures : 'No temperatures'}
+                    {this.props.items && this.props.items.data && this.props.items.data[0] && this.props.items.data[0].temperature && this.props.items.data[0].temperature !== '-1' ? this.props.items.data[0].temperature : 'No temperatures'}
                 </Text>
-                <Button onPress={this.props.getValues} title="Refresh"/>
+                <Button onPress={this.props.getLast} title="Refresh"/>
             </View>
         );
     }
 }
 
 TemperatureView.propTypes = {
-    temperatures: PropTypes.string,
-    getValues: PropTypes.func
+    items: PropTypes.object,
+    hasErrored: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    getLast: PropTypes.func
 };
 
 export default TemperatureView;
