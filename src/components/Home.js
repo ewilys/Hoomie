@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import styled from 'styled-components/native';
-import TemperatureContainer from "../containers/TemperatureContainer";
+import ChartContainer from "../containers/ChartContainer";
 
 const ContainerView = styled.View`
   flex: 1;
@@ -13,7 +13,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <ContainerView>
-                <TemperatureContainer/>
+                <ChartContainer/>
             </ContainerView>
         );
     }
