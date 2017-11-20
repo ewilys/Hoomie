@@ -1,20 +1,30 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
-import styled from 'styled-components/native';
 import ChartContainer from "../containers/ChartContainer";
-
-const ContainerView = styled.View`
-  flex: 1;
-  justifyContent: center;
-  alignItems: center;
-`;
+import {RefreshControl, ScrollView} from "react-native";
 
 class HomeScreen extends Component {
+    constructor() {
+        super();
+
+        this.state={
+            isRefreshing: false
+        }
+    }
+
+    _onRefresh() {
+        this.setState({isRefreshing: true});
+    }
+
+    hasRefreshed() {
+        this.setState({isRefreshing: false});
+    }
+
     render() {
         return (
-            <ContainerView>
-                <ChartContainer/>
-            </ContainerView>
+            <ScrollView refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
+                <ChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+            </ScrollView>
         );
     }
 }

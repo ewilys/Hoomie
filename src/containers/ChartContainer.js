@@ -5,18 +5,20 @@ import ChartView from "../components/ChartView";
 import { SmoothLine } from 'react-native-pathjs-charts'
 import { getCurrentYear } from "../utils/methods";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
         items: state.getItems,
         hasErrored: state.itemsHaveErrored,
         isLoading: state.itemsAreLoading,
+        homeRefreshing: ownProps.homeRefreshing,
         chartType: SmoothLine
     }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getCurrentYear: (subparameters) => dispatch(itemsFetchData('/temperature/year/'+getCurrentYear()))
+        getData: (subparameters) => dispatch(itemsFetchData('/temperature/year/'+getCurrentYear())),
+        homeRefreshed: ownProps.homeRefreshed
     }
 };
 

@@ -3,7 +3,7 @@
  **/
 
 import React, { Component } from 'react';
-import { Text, Button, View } from "react-native";
+import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
 import { chartOptions } from "../utils/constants"
@@ -19,7 +19,7 @@ class ChartView extends Component {
     }
 
     componentDidMount() {
-        this.props.getCurrentYear();
+        this.props.getData();
         if(this.props.items) {
             this.dataToChart(this.props.items);
         }
@@ -28,6 +28,14 @@ class ChartView extends Component {
     componentWillReceiveProps(nextProps) {
         if(this.props.items && nextProps.items && this.props.items !== nextProps.items) {
             this.dataToChart(nextProps.items);
+        }
+
+        if(!this.props.homeRefreshing && nextProps.homeRefreshing) {
+            this.props.getData();
+        }
+
+        if(this.props.isLoading && !nextProps.isLoading) {
+            this.props.homeRefreshed();
         }
     }
 
@@ -71,18 +79,19 @@ class ChartView extends Component {
                     <SmoothLine data={this.state.data} options={chartOptions} xKey='x' yKey='temperature'/>
                     : <Text/>
                 }
-                <Button onPress={this.props.getCurrentYear} title="Refresh"/>
             </View>
         );
     }
 }
 
 ChartView.propTypes = {
-    getCurrentYear: PropTypes.func.isRequired,
+    getData: PropTypes.func.isRequired,
     chartType: PropTypes.func.isRequired,
     items: PropTypes.object,
+    homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
+    homeRefreshed: PropTypes.func
 };
 
 export default ChartView;
