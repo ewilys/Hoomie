@@ -46,7 +46,7 @@ class ChartView extends Component {
      */
     dataToChart(items) {
         let chartData = [[]];
-        let chartPoint = {date: 0, temperature: 0, x: 0};
+        let chartPoint = {date: 0, temperature: 0};
         //Checks that items have values
         if(items && items.data && items.data.length > 0) {
             //Iterate through the temperatures
@@ -56,7 +56,6 @@ class ChartView extends Component {
                 //Gives it the correct values of date and temperature
                 chartPoint.temperature = items.data[tempIndex].temperature;
                 chartPoint.date = dateStrToInt(items.data[tempIndex].date);
-                chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
 
@@ -76,7 +75,7 @@ class ChartView extends Component {
         return (
             <View>
                 {this.state.data && this.state.data[0] && this.state.data[0][0] ?
-                    <SmoothLine data={this.state.data} options={chartOptions} xKey='x' yKey='temperature'/>
+                    <SmoothLine data={this.state.data} options={chartOptions} xKey='date' yKey='temperature'/>
                     : <Text/>
                 }
             </View>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { itemsFetchData } from '../actions'
 import ChartView from "../components/ChartView";
 import { SmoothLine } from 'react-native-pathjs-charts'
+import {getCurrentYear} from "../utils/methods";
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -16,14 +17,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getData: (subparameters) => dispatch(itemsFetchData(ownProps.fetchAddress)),
+        getData: (subparameters) => dispatch(itemsFetchData('/temperature/year/'+getCurrentYear())),
         homeRefreshed: ownProps.homeRefreshed
     }
 };
 
-const ChartContainer = connect(
+const YearChartContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ChartView);
 
-export default ChartContainer
+export default YearChartContainer
