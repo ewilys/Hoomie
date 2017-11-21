@@ -16,6 +16,19 @@ export function getCurrentYear() {
 }
 
 /**
+ * Gives the current month as a string
+ *
+ * @returns {string}
+ */
+export function getCurrentMonth() {
+    let date = new Date();
+    let monthStr = "";
+
+    monthStr += (date.getMonth() + 1);
+    return monthStr;
+}
+
+/**
  * Gives the date exactly one anterior month from today as a string
  *
  * @returns {string}
