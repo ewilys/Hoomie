@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import ChartContainer from "../containers/ChartContainer";
 import {RefreshControl, ScrollView} from "react-native";
+import { getCurrentYear } from "../utils/methods";
 
 class HomeScreen extends Component {
     constructor() {
@@ -23,7 +24,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <ScrollView refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
-                <ChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <ChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)} fetchAddress={'/temperature/year/'+getCurrentYear()}/>
             </ScrollView>
         );
     }
