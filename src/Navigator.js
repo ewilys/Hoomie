@@ -8,7 +8,6 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 
-import WelcomeScreen from './components/Welcome';
 import HomeScreen from './components/Home';
 import ProfileScreen from './components/Profile';
 import FavoritesScreen from './components/Favorites';
@@ -149,7 +148,6 @@ const AppDrawer = DrawerNavigator({
 });
 
 const Navigator = TabNavigator({
-    Welcome: {screen: WelcomeScreen},
     Main: {screen: AppDrawer},
 }, {
     navigationOptions: {

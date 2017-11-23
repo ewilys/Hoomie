@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
-
-import getTemp from './getTemp';
+import { getItems, itemsAreLoading, itemsHaveErrored } from './TemperatureReducer';
 
 export default combineReducers({
-    getTemp
+    getItems,
+    itemsAreLoading,
+    itemsHaveErrored
 });
