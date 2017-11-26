@@ -8,7 +8,7 @@ export const colors = {
   BLUE_500: '#2430ff',
 };
 
-export const serverIp = "192.168.43.163";
+export const serverIp = "hoomieserver.herokuapp.com";
 export const serverPort = "8080";
 
 export const chartOptions = {
