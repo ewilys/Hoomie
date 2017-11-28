@@ -1,6 +1,6 @@
-#Hoomie APP :
+# Hoomie APP :
 
-##Starting the app :
+## Starting the app :
 Before starting anything, make sure you have adb installed on your computer. If not, download the adb installer [here](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) and follow the steps.
 
 Start the react native client :
@@ -9,7 +9,7 @@ Start the react native client :
 Run the android debugging session :
     `react-native run-android`
 
-##Issues and workarounds :
+## Issues and workarounds :
 
 
  1. **Issue when running react-native run-android :**
