@@ -1,8 +1,0 @@
-Hoomie APP :
-
-Issues and workarounds :
-
-Issue when running reatc-native run-android : InstallException : Failed to install all .
-Error while uploading app-debug.apk : Unknown failure ([CDS]close[0]) :app:installDebug FAILED
-
-workaround : react-native run-android --deviceId 0123456789ABCDEF
