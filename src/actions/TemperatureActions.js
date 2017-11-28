@@ -31,19 +31,21 @@ export function itemsFetchDataSuccess(items) {
 export function itemsFetchData(fetchingAddress) {
     return (dispatch) => {
         dispatch(itemsAreLoading(true));
-
-        fetch(`http://${serverIp}:${serverPort}` + fetchingAddress)
+        console.log("fetching :http://"+serverIp+fetchingAddress);
+        fetch(`http://${serverIp}` + fetchingAddress)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-
+                console.log("fetch working");
                 dispatch(itemsAreLoading(false));
 
                 return response;
             })
             .then((response) => response.json())
-            .then((items) => dispatch(itemsFetchDataSuccess(items)))
+            .then((items) => {
+                console.log(items);
+                dispatch(itemsFetchDataSuccess(items))})
             .catch(() => dispatch(itemsHaveErrored(true)));
     };
 }
