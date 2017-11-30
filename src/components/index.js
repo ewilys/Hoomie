@@ -1,5 +1,5 @@
-import Button from './Button';
-import CustomDrawerContent from './CustomDrawerContent';
+import Button from './ui/Button';
+import CustomDrawerContent from './pages/CustomDrawerContent';
 
 export {
     Button,

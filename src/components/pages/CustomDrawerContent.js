@@ -2,7 +2,7 @@ import React from 'react';
 import {DrawerItems} from 'react-navigation';
 import styled from 'styled-components/native';
 
-import Button from './Button';
+import Button from '../ui/Button';
 
 const ContainerView = styled.View`
   flex: 1;

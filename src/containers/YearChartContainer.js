@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { connect } from 'react-redux'
 import { itemsFetchData } from '../actions'
-import ChartView from "../components/ChartView";
+import ChartView from "../components/ui/ChartView";
 import { SmoothLine } from 'react-native-pathjs-charts'
 import {getCurrentYear} from "../utils/methods";
 

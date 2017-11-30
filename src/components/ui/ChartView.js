@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
-import { chartOptions } from "../utils/constants"
-import { dateStrToInt } from "../utils/methods"
+import { chartOptions } from "../../utils/constants"
+import { dateStrToInt } from "../../utils/methods"
 
 class ChartView extends Component {
     constructor(props) {

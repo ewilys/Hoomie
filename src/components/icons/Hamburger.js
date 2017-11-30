@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {colors} from "../../utils/constants";
 
 const IconLeftContainer = styled.TouchableOpacity`
   height: 100%;
@@ -10,7 +11,7 @@ const IconLeftContainer = styled.TouchableOpacity`
 
 const Hamburger = ({ onPress }) => (
   <IconLeftContainer onPress={onPress}>
-    <Ionicons name="ios-menu" size={25} color='white' />
+    <Ionicons name="ios-menu" size={25} color={colors.HOOMIE_COLOR} />
   </IconLeftContainer>
 );
 

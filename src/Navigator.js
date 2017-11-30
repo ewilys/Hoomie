@@ -8,12 +8,12 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 
-import HomeScreen from './components/Home';
-import SettingsScreen from './components/Settings';
+import HomeScreen from './components/pages/Home';
+import SettingsScreen from './components/pages/Settings';
 
 import {HamburgerIcon, SettingsIcon, BackIcon} from './components/icons';
 
-import {CustomDrawerContent} from './components';
+import {CustomDrawerContent} from './components/index';
 import {colors} from './utils/constants';
 
 const AppMainTab = TabNavigator({

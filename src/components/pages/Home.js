@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
-import YearChartContainer from "../containers/YearChartContainer";
+import YearChartContainer from "../../containers/YearChartContainer";
 import {RefreshControl, ScrollView} from "react-native";
 
 class HomeScreen extends Component {
