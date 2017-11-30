@@ -1,17 +1,19 @@
 export const colors = {
-  WHITE: '#FFFFFF',
-  BLUE_50: '#dadcff',
-  BLUE_100: '#b6baff',
-  BLUE_200: '#9197ff',
-  BLUE_300: '#6d75ff',
-  BLUE_400: '#4852FF',
-  BLUE_500: '#2430ff',
+    WHITE: '#FFFFFF',
+    HOOMIE_50: '#99D6EA',
+    HOOMIE_100: '#7FCCE5',
+    HOOMIE_200: '#66C1E0',
+    HOOMIE_300: '#4CB7DB',
+    HOOMIE_400: '#33ADD6',
+    HOOMIE_500: '#19a3d1',
+    HOOMIE_COLOR: '#0099CC',
+    LIGHT_GREY: '#AAAAAA'
 };
 
 export const serverIp = "hoomieserver.herokuapp.com";
 
 export const chartOptions = {
-    width: 250,
+    width: 280,
     height: 250,
     color: '#2980B9',
     margin: {
