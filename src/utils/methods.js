@@ -24,6 +24,7 @@ export function getCurrentMonth() {
     let date = new Date();
     let monthStr = "";
 
+    monthStr += (date.getYear() + 1900) + "-";
     monthStr += (date.getMonth() + 1);
     return monthStr;
 }

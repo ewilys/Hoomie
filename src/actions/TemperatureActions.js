@@ -1,7 +1,7 @@
 /**
  Created by Guillaume Ferron on the 10/24/2017
  **/
-import { serverPort, serverIp } from "../utils/constants"
+import { serverIp } from "../utils/constants"
 
 export const ITEMS_HAVE_ERRORED = 'ITEMS_HAVE_ERRORED';
 export const ITEMS_ARE_LOADING = 'ITEMS_ARE_LOADING';
@@ -37,14 +37,12 @@ export function itemsFetchData(fetchingAddress) {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                console.log("fetch working");
                 dispatch(itemsAreLoading(false));
 
                 return response;
             })
             .then((response) => response.json())
             .then((items) => {
-                console.log(items);
                 dispatch(itemsFetchDataSuccess(items))})
             .catch(() => dispatch(itemsHaveErrored(true)));
     };

@@ -15,7 +15,15 @@ class ChartView extends Component {
 
         this.state={
             data: [[]]
-        }
+        };
+
+        this.chartStyle = {
+            marginTop: 20,
+            flexDirection: 'row',
+            padding: 10,
+            justifyContent: 'center'
+        };
+
     }
 
     componentDidMount() {
@@ -54,8 +62,9 @@ class ChartView extends Component {
                 //Reset the chart point
                 chartPoint = {date: 0, temperature: 0, x: 0};
                 //Gives it the correct values of date and temperature
-                chartPoint.temperature = items.data[tempIndex].temperature;
+                chartPoint.temperature = items.data[tempIndex].value;
                 chartPoint.date = dateStrToInt(items.data[tempIndex].date);
+                chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
 
@@ -73,9 +82,9 @@ class ChartView extends Component {
     render() {
         console.log(this.state.data);
         return (
-            <View>
+            <View style={this.chartStyle}>
                 {this.state.data && this.state.data[0] && this.state.data[0][0] ?
-                    <SmoothLine data={this.state.data} options={chartOptions} xKey='date' yKey='temperature'/>
+                    <SmoothLine data={this.state.data} options={chartOptions} xKey='x' yKey='temperature'/>
                     : <Text/>
                 }
             </View>

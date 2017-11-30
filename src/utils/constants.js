@@ -9,16 +9,15 @@ export const colors = {
 };
 
 export const serverIp = "hoomieserver.herokuapp.com";
-export const serverPort = "8080";
 
 export const chartOptions = {
-    width: 280,
-    height: 280,
+    width: 250,
+    height: 250,
     color: '#2980B9',
     margin: {
         top: 20,
-        left: 45,
-        bottom: 25,
+        left: 20,
+        bottom: 20,
         right: 20
     },
     animate: {
@@ -27,9 +26,9 @@ export const chartOptions = {
     },
     axisX: {
         showAxis: true,
-        showLines: true,
+        showLines: false,
         showLabels: true,
-        showTicks: true,
+        showTicks: false,
         zeroAxis: false,
         orient: 'bottom',
         label: {
@@ -41,9 +40,9 @@ export const chartOptions = {
     },
     axisY: {
         showAxis: true,
-        showLines: true,
+        showLines: false,
         showLabels: true,
-        showTicks: true,
+        showTicks: false,
         zeroAxis: false,
         orient: 'left',
         label: {
