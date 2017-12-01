@@ -15,7 +15,7 @@ export const serverIp = "hoomieserver.herokuapp.com";
 export const chartOptions = {
     width: 280,
     height: 250,
-    color: '#2980B9',
+    color: colors.HOOMIE_COLOR,
     margin: {
         top: 20,
         left: 20,

@@ -11,12 +11,12 @@ import { colors } from './utils/constants';
 
 const Root = styled.View`
   flex: 1;
-  backgroundColor: ${props => props.theme.HOOMIE_50};
+  backgroundColor: ${props => props.theme.WHITE};
 `;
 
 const StatusBarAndroid = styled.View`
   height: 24;
-  backgroundColor: ${props => props.theme.LIGHT_GREY};
+  backgroundColor: ${props => props.theme.HOOMIE_50};
 `;
 
 class App extends Component {

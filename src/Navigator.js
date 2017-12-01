@@ -1,76 +1,40 @@
 import React from 'react';
-import Platform from 'react-native';
 import {
-    TabNavigator,
     StackNavigator,
     DrawerNavigator,
 } from 'react-navigation';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import HomeScreen from './components/pages/Home';
 import SettingsScreen from './components/pages/Settings';
-
-import {HamburgerIcon, SettingsIcon, BackIcon} from './components/icons';
+import MonitoringScreen from './components/pages/Monitoring';
 
 import {CustomDrawerContent} from './components/index';
 import {colors} from './utils/constants';
 
-const AppMainTab = TabNavigator({
+const AppDrawer = DrawerNavigator({
     Home: {
         screen: HomeScreen,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Hoomie',
-            drawerIcon: ({tintColor}) => (
-                <FontAwesome name="home" size={23} color={tintColor}/>
-            ),
-            headerStyle: {
-                backgroundColor: colors.WHITE,
-                elevation: 0
-            },
+            drawerIcon: <MaterialIcons name="home" size={23} color={colors.HOOMIE_COLOR}/>,
             headerTitle: 'Hoomie',
-            headerTitleStyle: {
-                color: colors.HOOMIE_COLOR,
-
-            },
-            headerLeft: <HamburgerIcon onPress={() => navigation.navigate('DrawerOpen')}/>,
-            tabBarVisible: false
         })
-    }
-}, {
-    swipeEnabled: false,
-    animationEnabled: false,
-});
-
-const AppMainStack = StackNavigator({
-    Home: {screen: AppMainTab},
-    Settings: {screen: SettingsScreen},
-}, {
-    cardStyle: {
-        backgroundColor: colors.WHITE,
     },
-    mode: 'modal',
-});
-
-const AppDrawer = DrawerNavigator({
-    Home: {
-        screen: AppMainStack,
+    Monitoring: {
+        screen: MonitoringScreen,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'Monitoring',
+            drawerIcon: <MaterialIcons name="timeline" size={23} color={colors.HOOMIE_COLOR}/>,
+            headerTitle: 'Monitoring',
+        })
     },
     Settings: {
         screen: SettingsScreen,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Settings',
-            drawerIcon: ({tintColor}) => (
-                <Ionicons name="gear" size={23} color={tintColor}/>
-            ),
-            headerStyle: {
-                backgroundColor: colors.HOOMIE_100,
-            },
+            drawerIcon: <MaterialIcons name="settings" size={23} color={colors.HOOMIE_COLOR}/>,
             headerTitle: 'Settings',
-            headerTitleStyle: {
-                color: colors.WHITE,
-            },
-            headerLeft: <BackIcon onPress={() => navigation.goBack()}/>,
         })
     },
 }, {
@@ -79,19 +43,27 @@ const AppDrawer = DrawerNavigator({
             {...props}
         />),
     contentOptions: {
-        activeBackgroundColor: colors.HOOMIE_100,
+        activeBackgroundColor: colors.HOOMIE_COLOR,
         activeTintColor: colors.WHITE,
-        inactiveTintColor: colors.HOOMIE_200,
+        inactiveTintColor: colors.HOOMIE_COLOR,
     },
 });
 
-const Navigator = TabNavigator({
+const Navigator = StackNavigator({
     Main: {screen: AppDrawer},
 }, {
-    navigationOptions: {
+    navigationOptions: ({navigation}) => ({
         tabBarVisible: false,
-    },
-    swipeEnabled: false,
+        activeBackgroundColor: colors.WHITE,
+        headerStyle: {
+            elevation: 0,
+            padding: 10
+        },
+        headerTitleStyle: {
+            color: colors.HOOMIE_COLOR,
+        },
+        headerLeft: <MaterialIcons name='more-horiz' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerClose')}/>,
+    }),
 });
 
 export default Navigator;

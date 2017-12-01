@@ -14,7 +14,7 @@ const DrawerContainer = styled.View`
 
 const AvatarContainer = styled.View`
   flex: 4;
-  top: 30;
+  top: 10;
   alignItems: center;
   justifyContent: center;
 `;
@@ -23,7 +23,7 @@ const Avatar = styled.View`
   width: 120;
   height: 120;
   borderRadius: 60;
-  backgroundColor: ${props => props.theme.HOOMIE_100};
+  backgroundColor: ${props => props.theme.WHITE};
 `;
 
 const ItemContainer = styled.View`
