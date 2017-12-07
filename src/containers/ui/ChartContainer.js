@@ -1,9 +1,9 @@
 /* eslint-disable arrow-body-style */
 import { connect } from 'react-redux'
-import { itemsFetchData } from '../actions'
-import ChartView from "../components/ui/ChartView";
+import { itemsFetchData } from '../../actions/index'
+import ChartView from "../../components/ui/ChartView";
 import { SmoothLine } from 'react-native-pathjs-charts'
-import {getCurrentYear} from "../utils/methods";
+import {getCurrentYear} from "../../utils/methods";
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -22,9 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 };
 
-const YearChartContainer = connect(
+const ChartContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ChartView);
 
-export default YearChartContainer
+export default ChartContainer

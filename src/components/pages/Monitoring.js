@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
-import YearChartContainer from "../../containers/YearChartContainer";
+import ChartContainer from "../../containers/ui/ChartContainer";
 import {RefreshControl, ScrollView} from "react-native";
 import {screenStyle} from "../../utils/constants";
 
@@ -24,7 +24,7 @@ class MonitoringScreen extends Component {
     render() {
         return (
             <ScrollView style={screenStyle} refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
-                <YearChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <ChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
             </ScrollView>
         );
     }
