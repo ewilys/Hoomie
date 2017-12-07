@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
 import { chartOptions } from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
+const Dimensions = require('Dimensions');
 
 class ChartView extends Component {
     constructor(props) {
@@ -20,10 +21,14 @@ class ChartView extends Component {
         this.chartStyle = {
             marginTop: 20,
             flexDirection: 'row',
-            padding: 10,
+            marginLeft: 20,
+            marginRight: 5,
             justifyContent: 'center'
         };
 
+        this.updatedChartOptions = chartOptions;
+        this.updatedChartOptions.width = Dimensions.get('window').width - this.chartStyle.marginLeft - this.chartStyle.marginRight;
+        this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
     componentDidMount() {
@@ -84,7 +89,7 @@ class ChartView extends Component {
         return (
             <View style={this.chartStyle}>
                 {this.state.data && this.state.data[0] && this.state.data[0][0] ?
-                    <SmoothLine data={this.state.data} options={chartOptions} xKey='x' yKey='temperature'/>
+                    <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
                     : <Text/>
                 }
             </View>

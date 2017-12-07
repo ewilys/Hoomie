@@ -17,8 +17,6 @@ export const screenStyle = {
 };
 
 export const chartOptions = {
-    width: 280,
-    height: 250,
     color: colors.HOOMIE_COLOR,
     margin: {
         top: 20,
@@ -33,7 +31,7 @@ export const chartOptions = {
     axisX: {
         showAxis: true,
         showLines: false,
-        showLabels: true,
+        showLabels: false,
         showTicks: false,
         zeroAxis: false,
         orient: 'bottom',
@@ -53,7 +51,7 @@ export const chartOptions = {
         orient: 'left',
         label: {
             fontFamily: 'Arial',
-            fontSize: 14,
+            fontSize: 10,
             fontWeight: true,
             fill: '#34495E'
         }
