@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
-import styled from 'styled-components/native';
-
-const ContainerView = styled.View`
-  flex: 1;
-  justifyContent: center;
-  alignItems: center;
-`;
-
-const TitleText = styled.Text`
-  fontSize: 30;
-  color: ${props => props.theme.WHITE};
-`;
+import {screenStyle} from "../../utils/constants";
+import {ScrollView} from "react-native";
 
 class SettingsScreen extends Component {
   render() {
     return (
-      <ContainerView>
-        <TitleText>Settings</TitleText>
-      </ContainerView>
+      <ScrollView style={screenStyle}>
+      </ScrollView>
     );
   }
 }

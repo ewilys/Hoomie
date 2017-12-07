@@ -17,7 +17,9 @@ const AppDrawer = DrawerNavigator({
         screen: HomeScreen,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Hoomie',
-            drawerIcon: <MaterialIcons name="home" size={23} color={colors.HOOMIE_COLOR}/>,
+            drawerIcon: ({tintColor}) => (
+                <MaterialIcons name="home" size={23} color={tintColor}/>
+            ),
             headerTitle: 'Hoomie',
         })
     },
@@ -25,7 +27,9 @@ const AppDrawer = DrawerNavigator({
         screen: MonitoringScreen,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Monitoring',
-            drawerIcon: <MaterialIcons name="timeline" size={23} color={colors.HOOMIE_COLOR}/>,
+            drawerIcon: ({tintColor}) => (
+                <MaterialIcons name="timeline" size={23} color={tintColor}/>
+            ),
             headerTitle: 'Monitoring',
         })
     },
@@ -33,7 +37,9 @@ const AppDrawer = DrawerNavigator({
         screen: SettingsScreen,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Settings',
-            drawerIcon: <MaterialIcons name="settings" size={23} color={colors.HOOMIE_COLOR}/>,
+            drawerIcon: ({tintColor}) => (
+                <MaterialIcons name="settings" size={23} color={tintColor}/>
+            ),
             headerTitle: 'Settings',
         })
     },
@@ -54,7 +60,6 @@ const Navigator = StackNavigator({
 }, {
     navigationOptions: ({navigation}) => ({
         tabBarVisible: false,
-        activeBackgroundColor: colors.WHITE,
         headerStyle: {
             elevation: 0,
             padding: 10
@@ -62,7 +67,7 @@ const Navigator = StackNavigator({
         headerTitleStyle: {
             color: colors.HOOMIE_COLOR,
         },
-        headerLeft: <MaterialIcons name='more-horiz' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerClose')}/>,
+        headerLeft: <MaterialIcons name='more-vert' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerOpen')}/>,
     }),
 });
 

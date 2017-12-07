@@ -1,6 +1,7 @@
 import React from 'react';
 import {DrawerItems} from 'react-navigation';
 import styled from 'styled-components/native';
+import { Image } from 'react-native';
 
 import Button from '../ui/Button';
 
@@ -14,16 +15,8 @@ const DrawerContainer = styled.View`
 
 const AvatarContainer = styled.View`
   flex: 4;
-  top: 10;
   alignItems: center;
   justifyContent: center;
-`;
-
-const Avatar = styled.View`
-  width: 120;
-  height: 120;
-  borderRadius: 60;
-  backgroundColor: ${props => props.theme.WHITE};
 `;
 
 const ItemContainer = styled.View`
@@ -40,7 +33,7 @@ const CustomDrawerContent = (props) => (
     <ContainerView>
         <DrawerContainer>
             <AvatarContainer>
-                <Avatar/>
+                <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/High-Definition-Ultra-HD-Wallpaper-96262544.jpg')}/>
             </AvatarContainer>
             <ItemContainer>
                 <DrawerItems {...props} />

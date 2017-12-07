@@ -12,6 +12,10 @@ export const colors = {
 
 export const serverIp = "hoomieserver.herokuapp.com";
 
+export const screenStyle = {
+    backgroundColor: colors.WHITE
+};
+
 export const chartOptions = {
     width: 280,
     height: 250,
