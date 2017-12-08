@@ -4,18 +4,18 @@
 
 const initialState = {temperatures: "-1"};
 
-export function getItems(state = initialState, action) {
+export function getTemperatures(state = initialState, action) {
     switch(action.type) {
-        case 'ITEMS_FETCH_DATA_SUCCESS':
-            return action.items;
+        case 'TEMPERATURES_FETCH_DATA_SUCCESS':
+            return action.temperatures;
         default:
             return state;
     }
 }
 
-export function itemsHaveErrored(state = false, action) {
+export function temperaturesHaveErrored(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_HAVE_ERRORED':
+        case 'TEMPERATURES_HAVE_ERRORED':
             return action.hasErrored;
 
         default:
@@ -23,9 +23,9 @@ export function itemsHaveErrored(state = false, action) {
     }
 }
 
-export function itemsAreLoading(state = false, action) {
+export function temperaturesAreLoading(state = false, action) {
     switch (action.type) {
-        case 'ITEMS_ARE_LOADING':
+        case 'TEMPERATURES_ARE_LOADING':
             return action.isLoading;
 
         default:

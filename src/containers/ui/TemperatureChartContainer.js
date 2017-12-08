@@ -1,15 +1,15 @@
 /* eslint-disable arrow-body-style */
 import { connect } from 'react-redux'
-import { itemsFetchData } from '../../actions/index'
-import ChartView from "../../components/ui/ChartView";
+import { temperaturesFetchData } from '../../actions/index'
+import TemperatureChartView from "../../components/ui/TemperatureChartView";
 import { SmoothLine } from 'react-native-pathjs-charts'
 import {getCurrentYear} from "../../utils/methods";
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        items: state.getItems,
-        hasErrored: state.itemsHaveErrored,
-        isLoading: state.itemsAreLoading,
+        temperatures: state.getTemperatures,
+        hasErrored: state.temperaturesHaveErrored,
+        isLoading: state.temperaturesAreLoading,
         homeRefreshing: ownProps.homeRefreshing,
         chartType: SmoothLine
     }
@@ -17,14 +17,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getData: (subparameters) => dispatch(itemsFetchData('/temperature/year/'+getCurrentYear())),
+        getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/year/'+getCurrentYear())),
         homeRefreshed: ownProps.homeRefreshed
     }
 };
 
-const ChartContainer = connect(
+const TemperatureChartContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ChartView);
+)(TemperatureChartView);
 
-export default ChartContainer
+export default TemperatureChartContainer

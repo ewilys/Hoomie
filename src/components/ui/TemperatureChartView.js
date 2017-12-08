@@ -10,7 +10,7 @@ import { chartOptions } from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
 const Dimensions = require('Dimensions');
 
-class ChartView extends Component {
+class TemperatureChartView extends Component {
     constructor(props) {
         super(props);
 
@@ -33,14 +33,14 @@ class ChartView extends Component {
 
     componentDidMount() {
         this.props.getData();
-        if(this.props.items) {
-            this.dataToChart(this.props.items);
+        if(this.props.temperatures) {
+            this.dataToChart(this.props.temperatures);
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.items && nextProps.items && this.props.items !== nextProps.items) {
-            this.dataToChart(nextProps.items);
+        if(this.props.temperatures && nextProps.temperatures && this.props.temperatures !== nextProps.temperatures) {
+            this.dataToChart(nextProps.temperatures);
         }
 
         if(!this.props.homeRefreshing && nextProps.homeRefreshing) {
@@ -53,22 +53,22 @@ class ChartView extends Component {
     }
 
     /**
-     * Convert the items received from server to exploitable data for the graphs
+     * Convert the temperatures received from server to exploitable data for the graphs
      *
-     * @param items = the items received from server
+     * @param temperatures = the temperatures received from server
      */
-    dataToChart(items) {
+    dataToChart(temperatures) {
         let chartData = [[]];
         let chartPoint = {date: 0, temperature: 0};
-        //Checks that items have values
-        if(items && items.data && items.data.length > 0) {
+        //Checks that temperatures have values
+        if(temperatures && temperatures.data && temperatures.data.length > 0) {
             //Iterate through the temperatures
-            for (let tempIndex = 0; tempIndex < items.data.length; tempIndex++) {
+            for (let tempIndex = 0; tempIndex < temperatures.data.length; tempIndex++) {
                 //Reset the chart point
                 chartPoint = {date: 0, temperature: 0, x: 0};
                 //Gives it the correct values of date and temperature
-                chartPoint.temperature = items.data[tempIndex].value;
-                chartPoint.date = dateStrToInt(items.data[tempIndex].date);
+                chartPoint.temperature = temperatures.data[tempIndex].value;
+                chartPoint.date = dateStrToInt(temperatures.data[tempIndex].date);
                 chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
@@ -97,14 +97,14 @@ class ChartView extends Component {
     }
 }
 
-ChartView.propTypes = {
+TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
     chartType: PropTypes.func.isRequired,
-    items: PropTypes.object,
+    temperatures: PropTypes.object,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
     homeRefreshed: PropTypes.func
 };
 
-export default ChartView;
+export default TemperatureChartView;

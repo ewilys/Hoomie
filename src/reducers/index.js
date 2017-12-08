@@ -1,8 +1,8 @@
 import {combineReducers} from 'redux';
-import { getItems, itemsAreLoading, itemsHaveErrored } from './ChartReducer';
+import { getTemperatures, temperaturesAreLoading, temperaturesHaveErrored } from './TemperatureReducer';
 
 export default combineReducers({
-    getItems,
-    itemsAreLoading,
-    itemsHaveErrored
+    getTemperatures,
+    temperaturesAreLoading,
+    temperaturesHaveErrored
 });
