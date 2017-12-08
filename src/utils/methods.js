@@ -30,6 +30,22 @@ export function getCurrentMonth() {
 }
 
 /**
+ * Gives the current day as a string
+ *
+ * @returns {string}
+ */
+export function getCurrentDay() {
+    let date = new Date();
+    let dayStr = "";
+
+    dayStr += (date.getYear() + 1900) + "-";
+    dayStr += (date.getMonth() + 1);
+    dayStr += (date.getDay());
+
+    return dayStr;
+}
+
+/**
  * Gives the date exactly one anterior month from today as a string
  *
  * @returns {string}
