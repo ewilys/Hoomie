@@ -24,7 +24,7 @@ class MonitoringScreen extends Component {
     render() {
         return (
             <ScrollView style={screenStyle} refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
-                <TemperatureChartContainer homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChartContainer subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
             </ScrollView>
         );
     }

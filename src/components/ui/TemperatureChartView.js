@@ -85,7 +85,7 @@ class TemperatureChartView extends Component {
     }
 
     render() {
-        console.log(this.state.data);
+        console.log("state : ", this.state.data);
         return (
             <View style={this.chartStyle}>
                 {this.state.data && this.state.data[0] && this.state.data[0][0] ?
