@@ -2,35 +2,38 @@
  Created by Guillaume Ferron on the 10/24/2017
  **/
 
-const initialState = {
-    temperature: {
-        year: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        },
-        month: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        },
-        day: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        }
-    }
-};
+import {temperatureInitialState} from "../utils/constants";
 
-export function getTemperatures(state = initialState, action) {
+export function getTemperatures(state = temperatureInitialState, action) {
     if(action && action.temperature) {
         switch (action.type) {
             case 'TEMPERATURES_YEAR_FETCH_DATA_SUCCESS':
-                return action.temperature.year.values;
+                return {
+                    ...state,
+                    temperature: {
+                        year: {
+                            values: action.temperature.year.values
+                        }
+                    }
+                };
             case 'TEMPERATURES_MONTH_FETCH_DATA_SUCCESS':
-                return action.temperature.month.values;
+                return {
+                    ...state,
+                    temperature: {
+                        month: {
+                            values: action.temperature.month.values
+                        }
+                    }
+                };
             case 'TEMPERATURES_DAY_FETCH_DATA_SUCCESS':
-                return action.temperature.day.values;
+                return {
+                    ...state,
+                    temperature: {
+                        day: {
+                            values: action.temperature.day.values
+                        }
+                    }
+                };
             default:
                 return state;
         }

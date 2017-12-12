@@ -16,6 +16,26 @@ export const screenStyle = {
     backgroundColor: colors.WHITE
 };
 
+export const temperatureInitialState = {
+    temperature: {
+        year: {
+            hasErrored: false,
+            isLoading: false,
+            values: []
+        },
+        month: {
+            hasErrored: false,
+            isLoading: false,
+            values: []
+        },
+        day: {
+            hasErrored: false,
+            isLoading: false,
+            values: []
+        }
+    }
+};
+
 export const chartOptions = {
     color: colors.HOOMIE_COLOR,
     margin: {

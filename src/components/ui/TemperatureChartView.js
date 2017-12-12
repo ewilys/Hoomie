@@ -15,7 +15,7 @@ class TemperatureChartView extends Component {
         super(props);
 
         this.state={
-            data: [[]]
+            temperatures: [[]]
         };
 
         this.chartStyle = {
@@ -59,16 +59,16 @@ class TemperatureChartView extends Component {
      */
     dataToChart(temperatures) {
         let chartData = [[]];
-        let chartPoint = {date: 0, temperature: 0};
+        let chartPoint = {date: 0, temperature: 0, x: 0};
         //Checks that temperatures have values
-        if(temperatures && temperatures.data && temperatures.data.length > 0) {
+        if(temperatures && temperatures.length > 0) {
             //Iterate through the temperatures
-            for (let tempIndex = 0; tempIndex < temperatures.data.length; tempIndex++) {
+            for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
                 //Reset the chart point
                 chartPoint = {date: 0, temperature: 0, x: 0};
                 //Gives it the correct values of date and temperature
-                chartPoint.temperature = temperatures.data[tempIndex].value;
-                chartPoint.date = dateStrToInt(temperatures.data[tempIndex].date);
+                chartPoint.temperature = temperatures[tempIndex].value;
+                chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
                 chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
@@ -79,17 +79,16 @@ class TemperatureChartView extends Component {
             });
 
             this.setState({
-                data: chartData
+                temperatures: chartData
             })
         }
     }
 
     render() {
-        console.log("state : ", this.state.data);
         return (
             <View style={this.chartStyle}>
-                {this.state.data && this.state.data[0] && this.state.data[0][0] ?
-                    <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
+                {this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0] ?
+                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
                     : <Text/>
                 }
             </View>
@@ -100,7 +99,7 @@ class TemperatureChartView extends Component {
 TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
     chartType: PropTypes.func.isRequired,
-    temperatures: PropTypes.object,
+    temperatures: PropTypes.array,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
