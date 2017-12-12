@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             };
         case "month":
             return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/month/2017-10', ownProps.subparameters)),
+                getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/month/'+getCurrentMonth(), ownProps.subparameters)),
                 homeRefreshed: ownProps.homeRefreshed
             };
         case "day":
