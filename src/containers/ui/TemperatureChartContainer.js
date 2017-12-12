@@ -19,11 +19,37 @@ function getTemperatures(state, period) {
     }
 }
 
+function getLoading(state, period) {
+    if(state && state.temperaturesAreLoading && state.temperaturesAreLoading.temperature) {
+        switch(period) {
+            case "year":
+                return state.temperaturesAreLoading.temperature.year && state.temperaturesAreLoading.temperature.year.isLoading ? state.temperaturesAreLoading.temperature.year.isLoading : temperatureInitialState.temperature.year.isLoading;
+            case "month":
+                return state.temperaturesAreLoading.temperature.month && state.temperaturesAreLoading.temperature.month.isLoading ? state.temperaturesAreLoading.temperature.month.isLoading : temperatureInitialState.temperature.month.isLoading;
+            case "day":
+                return state.temperaturesAreLoading.temperature.day && state.temperaturesAreLoading.temperature.day.isLoading ? state.temperaturesAreLoading.temperature.day.isLoading : temperatureInitialState.temperature.day.isLoading;
+        }
+    }
+}
+
+function getError(state, period) {
+    if(state && state.temperaturesHaveErrored && state.temperaturesHaveErrored.temperature) {
+        switch(period) {
+            case "year":
+                return state.temperaturesHaveErrored.temperature.year && state.temperaturesHaveErrored.temperature.year.hasErrored ? state.temperaturesHaveErrored.temperature.year.hasErrored : temperatureInitialState.temperature.year.hasErrored;
+            case "month":
+                return state.temperaturesHaveErrored.temperature.month && state.temperaturesHaveErrored.temperature.month.hasErrored ? state.temperaturesHaveErrored.temperature.month.hasErrored : temperatureInitialState.temperature.month.hasErrored;
+            case "day":
+                return state.temperaturesHaveErrored.temperature.day && state.temperaturesHaveErrored.temperature.day.hasErrored ? state.temperaturesHaveErrored.temperature.day.hasErrored : temperatureInitialState.temperature.day.hasErrored;
+        }
+    }
+}
+
 const mapStateToProps = (state, ownProps) => {
     return {
         temperatures: getTemperatures(state, ownProps.subparameters.period),
-        hasErrored: state.temperaturesHaveErrored,
-        isLoading: state.temperaturesAreLoading,
+        hasErrored: getError(state, ownProps.subparameters.period),
+        isLoading: getLoading(state, ownProps.subparameters.period),
         homeRefreshing: ownProps.homeRefreshing,
         chartType: SmoothLine
     }

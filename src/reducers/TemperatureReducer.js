@@ -43,15 +43,36 @@ export function getTemperatures(state = temperatureInitialState, action) {
     }
 }
 
-export function temperaturesHaveErrored(state = false, action) {
+export function temperaturesHaveErrored(state = temperatureInitialState, action) {
     if(action && action.temperature) {
         switch (action.type) {
             case 'TEMPERATURES_YEAR_HAVE_ERRORED':
-                return action.temperature.year.hasErrored;
+                return {
+                    ...state,
+                    temperature: {
+                        year: {
+                            hasErrored: action.temperature.year.hasErrored
+                        }
+                    }
+                };
             case 'TEMPERATURES_MONTH_HAVE_ERRORED':
-                return action.temperature.month.hasErrored;
+                return {
+                    ...state,
+                    temperature: {
+                        month: {
+                            hasErrored: action.temperature.month.hasErrored
+                        }
+                    }
+                };
             case 'TEMPERATURES_DAY_HAVE_ERRORED':
-                return action.temperature.day.hasErrored;
+                return {
+                    ...state,
+                    temperature: {
+                        day: {
+                            hasErrored: action.temperature.day.hasErrored
+                        }
+                    }
+                };
             default:
                 return state;
         }
@@ -61,15 +82,36 @@ export function temperaturesHaveErrored(state = false, action) {
     }
 }
 
-export function temperaturesAreLoading(state = false, action) {
+export function temperaturesAreLoading(state = temperatureInitialState, action) {
     if(action && action.temperature) {
         switch (action.type) {
             case 'TEMPERATURES_YEAR_ARE_LOADING':
-                return action.temperature.year.isLoading;
+                return {
+                    ...state,
+                    temperature: {
+                        year: {
+                            isLoading: action.temperature.year.isLoading
+                        }
+                    }
+                };
             case 'TEMPERATURES_MONTH_ARE_LOADING':
-                return action.temperature.month.isLoading;
+                return {
+                    ...state,
+                    temperature: {
+                        month: {
+                            isLoading: action.temperature.month.isLoading
+                        }
+                    }
+                };
             case 'TEMPERATURES_DAY_ARE_LOADING':
-                return action.temperature.day.isLoading;
+                return {
+                    ...state,
+                    temperature: {
+                        day: {
+                            isLoading: action.temperature.day.isLoading
+                        }
+                    }
+                };
             default:
                 return state;
         }
