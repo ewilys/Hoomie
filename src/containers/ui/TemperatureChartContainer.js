@@ -2,7 +2,6 @@
 import { connect } from 'react-redux'
 import { temperaturesFetchData } from '../../actions/index'
 import TemperatureChartView from "../../components/ui/TemperatureChartView";
-import { SmoothLine } from 'react-native-pathjs-charts'
 import {getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods";
 import {temperatureInitialState} from "../../utils/constants";
 
@@ -51,7 +50,6 @@ const mapStateToProps = (state, ownProps) => {
         hasErrored: getError(state, ownProps.subparameters.period),
         isLoading: getLoading(state, ownProps.subparameters.period),
         homeRefreshing: ownProps.homeRefreshing,
-        chartType: SmoothLine
     }
 };
 

@@ -98,7 +98,6 @@ class TemperatureChartView extends Component {
 
 TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
-    chartType: PropTypes.func.isRequired,
     temperatures: PropTypes.array,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
