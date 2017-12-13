@@ -77,6 +77,7 @@ const Navigator = StackNavigator({
         },
         headerTitleStyle: {
             color: colors.HOOMIE_COLOR,
+            fontWeight: '100'
         },
         headerLeft: <MaterialIcons name='more-vert' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerOpen')}/>,
     }),

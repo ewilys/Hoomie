@@ -18,7 +18,7 @@ class MeanValue extends Component {
         this.meanValueStyle = {
             color: colors.HOOMIE_COLOR,
             fontSize: 15,
-            fontWeight: 'bold',
+            fontWeight: '100',
             marginRight: 30
         };
     }

@@ -29,7 +29,7 @@ class UndefinedChart extends Component {
         this.meanValueStyle = {
             color: colors.UNDEFINED,
             fontSize: 15,
-            fontWeight: 'bold',
+            fontWeight: '100',
             marginRight: 30
         };
 
@@ -51,7 +51,7 @@ class UndefinedChart extends Component {
         this.chartTitleStyle = {
             color: colors.UNDEFINED,
             fontSize: 15,
-            fontWeight: 'bold',
+            fontWeight: '100',
             marginLeft: 30
         };
 

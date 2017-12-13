@@ -33,7 +33,7 @@ class TemperatureChartView extends Component {
         this.chartTitleStyle = {
             color: colors.HOOMIE_COLOR,
             fontSize: 15,
-            fontWeight: 'bold',
+            fontWeight: '100',
             marginLeft: 30
         };
 
