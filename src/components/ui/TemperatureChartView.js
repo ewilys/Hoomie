@@ -9,6 +9,7 @@ import { SmoothLine } from 'react-native-pathjs-charts'
 import {chartOptions, colors} from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
 import MeanValue from "./MeanValue";
+import UndefinedChart from "./UndefinedChart";
 const Dimensions = require('Dimensions');
 
 class TemperatureChartView extends Component {
@@ -106,7 +107,7 @@ class TemperatureChartView extends Component {
                 </View>
             );
         } else {
-            return(<Text/>);
+            return(<UndefinedChart/>);
         }
     }
 }

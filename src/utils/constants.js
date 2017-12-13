@@ -1,5 +1,6 @@
 export const colors = {
     WHITE: '#FFFFFF',
+    UNDEFINED: '#888888',
     HOOMIE_50: '#99D6EA',
     HOOMIE_100: '#7FCCE5',
     HOOMIE_200: '#66C1E0',
