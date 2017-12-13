@@ -7,7 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import HomeScreen from './components/pages/Home';
 import SettingsScreen from './components/pages/Settings';
-import MonitoringScreen from './components/pages/Monitoring';
+import Monitoring from './components/pages/Monitoring';
 
 import {CustomDrawerContent} from './components/index';
 import {colors} from './utils/constants';
@@ -24,7 +24,7 @@ const AppDrawer = DrawerNavigator({
         })
     },
     Monitoring: {
-        screen: MonitoringScreen,
+        screen: Monitoring,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Monitoring',
             drawerIcon: ({tintColor}) => (

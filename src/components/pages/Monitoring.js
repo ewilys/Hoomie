@@ -4,7 +4,7 @@ import TemperatureChartContainer from "../../containers/ui/TemperatureChartConta
 import {RefreshControl, ScrollView} from "react-native";
 import {screenStyle} from "../../utils/constants";
 
-class MonitoringScreen extends Component {
+class Monitoring extends Component {
     constructor() {
         super();
 
@@ -31,4 +31,4 @@ class MonitoringScreen extends Component {
     }
 }
 
-export default MonitoringScreen;
+export default Monitoring;
