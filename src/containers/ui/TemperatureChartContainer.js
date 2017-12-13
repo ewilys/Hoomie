@@ -11,6 +11,7 @@ const mapStateToProps = (state, ownProps) => {
         hasErrored: state.temperaturesHaveErrored,
         isLoading: state.temperaturesAreLoading,
         homeRefreshing: ownProps.homeRefreshing,
+        chartTitle: ownProps.chartTitle,
         chartType: SmoothLine
     };
 };

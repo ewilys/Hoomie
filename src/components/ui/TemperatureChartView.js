@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
-import { chartOptions } from "../../utils/constants"
+import {chartOptions, colors} from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
 const Dimensions = require('Dimensions');
 
@@ -20,10 +20,16 @@ class TemperatureChartView extends Component {
 
         this.chartStyle = {
             marginTop: 20,
-            flexDirection: 'row',
+            flexDirection: 'column',
             marginLeft: 20,
             marginRight: 5,
             justifyContent: 'center'
+        };
+
+        this.chartTitleStyle = {
+            color: colors.HOOMIE_COLOR,
+            fontSize: 15,
+            fontWeight: 'bold'
         };
 
         this.updatedChartOptions = chartOptions;
@@ -88,6 +94,7 @@ class TemperatureChartView extends Component {
         console.log("state : ", this.state.data);
         return (
             <View style={this.chartStyle}>
+                <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
                 {this.state.data && this.state.data[0] && this.state.data[0][0] ?
                     <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
                     : <Text/>
@@ -101,6 +108,7 @@ TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
     chartType: PropTypes.func.isRequired,
     temperatures: PropTypes.object,
+    chartTitle: PropTypes.string,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
