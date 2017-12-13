@@ -6,7 +6,7 @@ import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
-import { chartOptions } from "../../utils/constants"
+import {chartOptions, colors} from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
 const Dimensions = require('Dimensions');
 
@@ -19,15 +19,19 @@ class TemperatureChartView extends Component {
         };
 
         this.chartStyle = {
-            marginTop: 20,
-            flexDirection: 'row',
-            marginLeft: 20,
-            marginRight: 5,
-            justifyContent: 'center'
+            flexDirection: 'column',
+            alignContent: 'center'
+        };
+
+        this.chartTitleStyle = {
+            color: colors.HOOMIE_COLOR,
+            fontSize: 15,
+            fontWeight: 'bold',
+            marginLeft: 30
         };
 
         this.updatedChartOptions = chartOptions;
-        this.updatedChartOptions.width = Dimensions.get('window').width - this.chartStyle.marginLeft - this.chartStyle.marginRight;
+        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
         this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
@@ -85,20 +89,24 @@ class TemperatureChartView extends Component {
     }
 
     render() {
-        return (
-            <View style={this.chartStyle}>
-                {this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0] ?
-                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
-                    : <Text/>
-                }
-            </View>
-        );
+        if(this.state.data && this.state.data[0] && this.state.data[0][0]) {
+            return (
+                <View style={this.chartStyle}>
+                    <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
+                    <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
+                </View>
+            );
+        } else {
+            return(<Text/>);
+        }
     }
 }
 
 TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
-    temperatures: PropTypes.array,
+    chartType: PropTypes.func.isRequired,
+    temperatures: PropTypes.object,
+    chartTitle: PropTypes.string,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
