@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
 import {chartOptions, colors} from "../../utils/constants"
 import { dateStrToInt } from "../../utils/methods"
+import MeanValue from "./MeanValue";
 const Dimensions = require('Dimensions');
 
 class TemperatureChartView extends Component {
@@ -21,6 +22,11 @@ class TemperatureChartView extends Component {
         this.chartStyle = {
             flexDirection: 'column',
             alignContent: 'center'
+        };
+
+        this.headerStyle = {
+            flexDirection: 'row',
+            justifyContent: 'space-between'
         };
 
         this.chartTitleStyle = {
@@ -92,7 +98,10 @@ class TemperatureChartView extends Component {
         if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0]) {
             return (
                 <View style={this.chartStyle}>
-                    <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
+                    <View style={this.headerStyle}>
+                        <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
+                        <MeanValue values={this.state.temperatures[0]} unit="°C"/>
+                    </View>
                     <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
                 </View>
             );
