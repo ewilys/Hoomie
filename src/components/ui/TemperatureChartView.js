@@ -89,11 +89,11 @@ class TemperatureChartView extends Component {
     }
 
     render() {
-        if(this.state.data && this.state.data[0] && this.state.data[0][0]) {
+        if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0]) {
             return (
                 <View style={this.chartStyle}>
                     <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                    <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
+                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
                 </View>
             );
         } else {
@@ -104,8 +104,7 @@ class TemperatureChartView extends Component {
 
 TemperatureChartView.propTypes = {
     getData: PropTypes.func.isRequired,
-    chartType: PropTypes.func.isRequired,
-    temperatures: PropTypes.object,
+    temperatures: PropTypes.array,
     chartTitle: PropTypes.string,
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
