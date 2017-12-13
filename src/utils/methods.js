@@ -39,8 +39,8 @@ export function getCurrentDay() {
     let dayStr = "";
 
     dayStr += (date.getYear() + 1900) + "-";
-    dayStr += (date.getMonth() + 1);
-    dayStr += (date.getDay());
+    dayStr += (date.getMonth() + 1)+"-";
+    dayStr += (date.getDate());
 
     return dayStr;
 }
