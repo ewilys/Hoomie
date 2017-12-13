@@ -70,14 +70,14 @@ class TemperatureChartView extends Component {
             for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
                 //Reset the chart point
                 chartPoint = {date: 0, temperature: 0, x: 0};
-                //Gives it the correct values of date and temperature
-                chartPoint.temperature = temperatures[tempIndex].value;
+                //Gives it the correct values of date and temperature, with one decimal
+                chartPoint.temperature = Math.round( temperatures[tempIndex].value * 10) / 10;
                 chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
                 chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
 
-            //Make sure the poitns are in ascending order according to the date
+            //Make sure the points are in ascending order according to the date
             chartData[0].sort(function(a, b) {
                 return a.date - b.date
             });
