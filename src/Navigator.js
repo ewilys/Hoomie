@@ -8,6 +8,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import HomeScreen from './components/pages/Home';
 import SettingsScreen from './components/pages/Settings';
 import Monitoring from './components/pages/Monitoring';
+import University from './components/pages/University';
 
 import {CustomDrawerContent} from './components/index';
 import {colors} from './utils/constants';
@@ -31,6 +32,16 @@ const AppDrawer = DrawerNavigator({
                 <MaterialIcons name="timeline" size={23} color={tintColor}/>
             ),
             headerTitle: 'Monitoring',
+        })
+    },
+    University: {
+        screen: University,
+        navigationOptions: ({navigation}) => ({
+            drawerLabel: 'University',
+            drawerIcon: ({tintColor}) => (
+                <MaterialIcons name="school" size={23} color={tintColor}/>
+            ),
+            headerTitle: 'University',
         })
     },
     Settings: {
