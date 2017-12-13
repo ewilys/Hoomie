@@ -19,21 +19,19 @@ class TemperatureChartView extends Component {
         };
 
         this.chartStyle = {
-            marginTop: 20,
             flexDirection: 'column',
-            marginLeft: 20,
-            marginRight: 5,
-            justifyContent: 'center'
+            alignContent: 'center'
         };
 
         this.chartTitleStyle = {
             color: colors.HOOMIE_COLOR,
             fontSize: 15,
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            marginLeft: 30
         };
 
         this.updatedChartOptions = chartOptions;
-        this.updatedChartOptions.width = Dimensions.get('window').width - this.chartStyle.marginLeft - this.chartStyle.marginRight;
+        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
         this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
@@ -91,16 +89,16 @@ class TemperatureChartView extends Component {
     }
 
     render() {
-        console.log("state : ", this.state.data);
-        return (
-            <View style={this.chartStyle}>
-                <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                {this.state.data && this.state.data[0] && this.state.data[0][0] ?
+        if(this.state.data && this.state.data[0] && this.state.data[0][0]) {
+            return (
+                <View style={this.chartStyle}>
+                    <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
                     <SmoothLine data={this.state.data} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
-                    : <Text/>
-                }
-            </View>
-        );
+                </View>
+            );
+        } else {
+            return(<Text/>);
+        }
     }
 }
 

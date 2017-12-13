@@ -19,10 +19,10 @@ export const screenStyle = {
 export const chartOptions = {
     color: colors.HOOMIE_COLOR,
     margin: {
-        top: 20,
-        left: 20,
-        bottom: 20,
-        right: 20
+        top: 30,
+        left: 30,
+        bottom: 30,
+        right: 30
     },
     animate: {
         type: 'delayed',
