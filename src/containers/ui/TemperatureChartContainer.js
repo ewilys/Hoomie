@@ -57,17 +57,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     switch(ownProps.subparameters.period) {
         case "year":
             return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/year/'+getCurrentYear(), ownProps.subparameters)),
+                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/year/'+getCurrentYear(), ownProps.subparameters)),
                 homeRefreshed: ownProps.homeRefreshed
             };
         case "month":
             return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/month/'+getCurrentMonth(), ownProps.subparameters)),
+                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/month/'+getCurrentMonth(), ownProps.subparameters)),
                 homeRefreshed: ownProps.homeRefreshed
             };
         case "day":
             return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/temperature/day/'+getCurrentDay(), ownProps.subparameters)),
+                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/day/'+getCurrentDay(), ownProps.subparameters)),
                 homeRefreshed: ownProps.homeRefreshed
             };
     }

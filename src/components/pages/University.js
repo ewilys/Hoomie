@@ -9,7 +9,8 @@ class University extends Component {
         super();
 
         this.state={
-            isRefreshing: false
+            isRefreshing: false,
+            room: "204"
         }
     }
 
@@ -24,8 +25,8 @@ class University extends Component {
     render() {
         return (
             <ScrollView style={screenStyle} refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
-                <TemperatureChartContainer subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChartContainer subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChartContainer room={this.state.room} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChartContainer room={this.state.room} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
             </ScrollView>
         );
     }
