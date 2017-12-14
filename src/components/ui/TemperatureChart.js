@@ -12,7 +12,7 @@ import MeanValue from "./MeanValue";
 import UndefinedChart from "./UndefinedChart";
 const Dimensions = require('Dimensions');
 
-class TemperatureChartView extends Component {
+class TemperatureChart extends Component {
     constructor(props) {
         super(props);
 
@@ -115,7 +115,7 @@ class TemperatureChartView extends Component {
 
     temperaturesFetchSuccess(temperatures, subparameters) {
         this.setState({
-            temperatures: TemperatureChartView.dataToChart(temperatures.data),
+            temperatures: TemperatureChart.dataToChart(temperatures.data),
             isLoading: false,
             hasErrored: false
         })
@@ -174,7 +174,6 @@ class TemperatureChartView extends Component {
     }
 
     render() {
-        console.log(this.state.temperatures);
         if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0]) {
             return (
                 <View style={this.chartStyle}>
@@ -191,7 +190,7 @@ class TemperatureChartView extends Component {
     }
 }
 
-TemperatureChartView.propTypes = {
+TemperatureChart.propTypes = {
     room: PropTypes.string.isRequired,
     period: PropTypes.string.isRequired,
     chartTitle: PropTypes.string,
@@ -200,4 +199,4 @@ TemperatureChartView.propTypes = {
     admin: PropTypes.bool,
 };
 
-export default TemperatureChartView;
+export default TemperatureChart;

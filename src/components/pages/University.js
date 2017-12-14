@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Picker, RefreshControl, ScrollView} from "react-native";
 import {screenStyle} from "../../utils/constants";
 import {getCurrentDay, getCurrentMonthAsStr, getCurrentYear} from "../../utils/methods";
-import TemperatureChartView from "../ui/TemperatureChartView";
+import TemperatureChart from "../ui/TemperatureChart";
 
 class University extends Component {
     constructor() {
@@ -31,9 +31,9 @@ class University extends Component {
                     <Picker.Item label="Room 204" value="204" />
                     <Picker.Item label="Room 205" value="205" />
                 </Picker>
-                <TemperatureChartView admin={true} period="year" room={this.state.room} chartTitle={getCurrentYear() + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChartView admin={true} period="month" room={this.state.room} chartTitle={getCurrentMonthAsStr() + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChartView admin={true} period="day" room={this.state.room} chartTitle={getCurrentMonthAsStr()+ " " + getCurrentDay().split("-")[2] + "th" + " Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChart admin={true} period="year" room={this.state.room} chartTitle={getCurrentYear() + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChart admin={true} period="month" room={this.state.room} chartTitle={getCurrentMonthAsStr() + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChart admin={true} period="day" room={this.state.room} chartTitle={getCurrentMonthAsStr()+ " " + getCurrentDay().split("-")[2] + "th" + " Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
             </ScrollView>
         );
     }
