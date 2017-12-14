@@ -57,20 +57,44 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     switch(ownProps.subparameters.period) {
         case "year":
-            return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/year/'+getCurrentYear(), ownProps.subparameters)),
-                homeRefreshed: ownProps.homeRefreshed
-            };
+            if(ownProps.room === "all" && ownProps.admin) {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/admin/temperature/averageYear/'+getCurrentYear()+'/all', ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
+            else {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/year/'+getCurrentYear(), ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
         case "month":
-            return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/month/'+getCurrentMonth(), ownProps.subparameters)),
-                homeRefreshed: ownProps.homeRefreshed
-            };
+            if(ownProps.room === "all" && ownProps.admin) {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/admin/temperature/averageMonth/'+getCurrentMonth()+'/all', ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
+            else {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/month/'+getCurrentMonth(), ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
         case "day":
-            return {
-                getData: (subparameters) => dispatch(temperaturesFetchData('/'+ownProps.room+'/temperature/day/'+getCurrentDay(), ownProps.subparameters)),
-                homeRefreshed: ownProps.homeRefreshed
-            };
+            if(ownProps.room === "all" && ownProps.admin) {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/admin/temperature/averageDay/'+getCurrentDay()+'/all', ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
+            else {
+                return {
+                    getData: (subparameters) => dispatch(temperaturesFetchData('/' + ownProps.room + '/temperature/day/' + getCurrentDay(), ownProps.subparameters)),
+                    homeRefreshed: ownProps.homeRefreshed
+                };
+            }
     }
 
 };
