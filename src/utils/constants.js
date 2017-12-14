@@ -52,13 +52,13 @@ export const chartOptions = {
     axisX: {
         showAxis: true,
         showLines: false,
-        showLabels: false,
+        showLabels: true,
         showTicks: false,
         zeroAxis: false,
         orient: 'bottom',
         label: {
             fontFamily: 'Arial',
-            fontSize: 14,
+            fontSize: 10,
             fontWeight: true,
             fill: '#34495E'
         }

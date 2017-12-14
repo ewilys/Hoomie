@@ -151,17 +151,16 @@ class TemperatureChart extends Component {
      */
     static dataToChart(temperatures) {
         let chartData = [[]];
-        let chartPoint = {date: 0, temperature: 0, x: 0};
+        let chartPoint = {date: 0, temperature: 0};
         //Checks that temperatures have values
         if(temperatures && temperatures.length > 0) {
             //Iterate through the temperatures
             for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
                 //Reset the chart point
-                chartPoint = {date: 0, temperature: 0, x: 0};
+                chartPoint = {date: 0, temperature: 0};
                 //Gives it the correct values of date and temperature, with one decimal
                 chartPoint.temperature = Math.round( temperatures[tempIndex].value * 10) / 10;
                 chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
-                chartPoint.x = tempIndex;
                 chartData[0].push(chartPoint);
             }
 
@@ -181,7 +180,7 @@ class TemperatureChart extends Component {
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
                         <MeanValue values={this.state.temperatures[0]} unit="°C"/>
                     </View>
-                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='x' yKey='temperature'/>
+                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='date' yKey='temperature'/>
                 </View>
             );
         } else {
