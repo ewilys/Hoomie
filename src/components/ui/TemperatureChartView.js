@@ -6,8 +6,8 @@ import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
 import { SmoothLine } from 'react-native-pathjs-charts'
-import {chartOptions, colors} from "../../utils/constants"
-import { dateStrToInt } from "../../utils/methods"
+import {chartOptions, colors, serverIp} from "../../utils/constants"
+import {dateStrToInt, getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods"
 import MeanValue from "./MeanValue";
 import UndefinedChart from "./UndefinedChart";
 const Dimensions = require('Dimensions');
@@ -17,7 +17,9 @@ class TemperatureChartView extends Component {
         super(props);
 
         this.state={
-            temperatures: [[]]
+            temperatures: [[]],
+            isLoading: false,
+            hasErrored: false,
         };
 
         this.chartStyle = {
@@ -43,28 +45,103 @@ class TemperatureChartView extends Component {
     }
 
     componentDidMount() {
-        this.props.getData();
-        if(this.props.temperatures) {
-            this.dataToChart(this.props.temperatures);
-        }
+        this.temperaturesFetchData();
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.temperatures && nextProps.temperatures && this.props.temperatures !== nextProps.temperatures) {
-            this.dataToChart(nextProps.temperatures);
-        }
-
         if(!this.props.homeRefreshing && nextProps.homeRefreshing) {
-            this.props.getData();
+            this.temperaturesFetchData();
         }
 
-        if(this.props.isLoading && !nextProps.isLoading) {
+        if(this.state.isLoading) {
             this.props.homeRefreshed();
         }
 
         if(this.props.room && nextProps.room && this.props.room !== nextProps.room) {
-            this.props.getData();
+            this.temperaturesFetchData();
         }
+    }
+
+    getFetchingAddress() {
+        let fetchingAddress = "";
+        if(this.props.admin) {
+            fetchingAddress += "/admin/temperature/average"+this.props.period[0].toUpperCase() + this.props.period.slice(1)+"/";
+            switch(this.props.period) {
+                case "year":
+                    fetchingAddress += getCurrentYear();
+                    break;
+                case  "month":
+                    fetchingAddress += getCurrentMonth();
+                    break;
+                case "day":
+                    fetchingAddress += getCurrentDay();
+                    break;
+            }
+            fetchingAddress += "/"+this.props.room
+        }
+        else {
+            fetchingAddress += "/"+this.props.room+"/temperature/"+this.props.period+"/";
+            switch(this.props.period) {
+                case "year":
+                    fetchingAddress += getCurrentYear();
+                    break;
+                case  "month":
+                    fetchingAddress += getCurrentMonth();
+                    break;
+                case "day":
+                    fetchingAddress += getCurrentDay();
+                    break;
+            }
+        }
+
+        return fetchingAddress;
+    }
+
+    temperaturesFetchData(subparameters) {
+        let fetchingAddress = this.getFetchingAddress();
+        fetch(`http://${serverIp}` + fetchingAddress)
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                this.temperaturesAreLoading();
+
+                return response;
+            })
+            .then((response) => response.json())
+            .then((temperatures) => this.temperaturesFetchSuccess(temperatures, subparameters))
+            .catch(() => this.temperaturesHaveErrored());
+    }
+
+    temperaturesFetchSuccess(temperatures, subparameters) {
+        this.setState({
+            temperatures: TemperatureChartView.dataToChart(temperatures.data),
+            isLoading: false,
+            hasErrored: false
+        })
+    }
+
+    temperaturesAreLoading() {
+        this.setState({
+            isLoading: true
+        })
+    }
+
+
+    temperaturesHaveErrored() {
+        this.setState({
+            hasErrored: true
+        });
+    }
+
+    errorTimeOut(subparameters) {
+        // We return a function instead of an action object
+        return (dispatch) => {
+            setTimeout(() => {
+                // This function is able to dispatch other action creators
+                dispatch(this.temperaturesHaveErrored());
+            }, 5000);
+        };
     }
 
     /**
@@ -72,7 +149,7 @@ class TemperatureChartView extends Component {
      *
      * @param temperatures = the temperatures received from server
      */
-    dataToChart(temperatures) {
+    static dataToChart(temperatures) {
         let chartData = [[]];
         let chartPoint = {date: 0, temperature: 0, x: 0};
         //Checks that temperatures have values
@@ -92,14 +169,12 @@ class TemperatureChartView extends Component {
             chartData[0].sort(function(a, b) {
                 return a.date - b.date
             });
-
-            this.setState({
-                temperatures: chartData
-            })
         }
+        return chartData;
     }
 
     render() {
+        console.log(this.state.temperatures);
         if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0]) {
             return (
                 <View style={this.chartStyle}>
@@ -117,14 +192,12 @@ class TemperatureChartView extends Component {
 }
 
 TemperatureChartView.propTypes = {
-    getData: PropTypes.func.isRequired,
-    temperatures: PropTypes.array,
+    room: PropTypes.string.isRequired,
+    period: PropTypes.string.isRequired,
     chartTitle: PropTypes.string,
     homeRefreshing: PropTypes.bool,
-    hasErrored: PropTypes.bool,
-    isLoading: PropTypes.bool,
     homeRefreshed: PropTypes.func,
-    room: PropTypes.string
+    admin: PropTypes.bool,
 };
 
 export default TemperatureChartView;

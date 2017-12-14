@@ -1,8 +1,6 @@
 /**
  Created by Guillaume Ferron on the 12/13/2017
  **/
-
-/* eslint-disable no-unused-vars */
 import React, {Component} from 'react';
 import {Text, View} from "react-native";
 import PropTypes from "prop-types";
