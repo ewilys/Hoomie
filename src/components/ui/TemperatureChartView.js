@@ -61,6 +61,10 @@ class TemperatureChartView extends Component {
         if(this.props.isLoading && !nextProps.isLoading) {
             this.props.homeRefreshed();
         }
+
+        if(this.props.room && nextProps.room && this.props.room !== nextProps.room) {
+            this.props.getData();
+        }
     }
 
     /**
@@ -119,7 +123,8 @@ TemperatureChartView.propTypes = {
     homeRefreshing: PropTypes.bool,
     hasErrored: PropTypes.bool,
     isLoading: PropTypes.bool,
-    homeRefreshed: PropTypes.func
+    homeRefreshed: PropTypes.func,
+    room: PropTypes.string
 };
 
 export default TemperatureChartView;

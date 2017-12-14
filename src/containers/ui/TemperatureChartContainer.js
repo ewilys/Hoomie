@@ -50,6 +50,7 @@ const mapStateToProps = (state, ownProps) => {
         hasErrored: getError(state, ownProps.subparameters.period),
         isLoading: getLoading(state, ownProps.subparameters.period),
         homeRefreshing: ownProps.homeRefreshing,
+        room: ownProps.room
     }
 };
 
