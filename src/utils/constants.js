@@ -78,3 +78,5 @@ export const chartOptions = {
         }
     }
 };
+
+export const WEATHER_API_KEY = "42bb67e6995a37350383335b8ad17aeb";
