@@ -106,7 +106,7 @@ class WeatherWidget extends Component {
         return (
             <View style={this.weatherStyle}>
                 <MaterialCommunityIcons name={name} size={30} color={"#555555"}/>
-                <Text>   {this.state.temperature} °C</Text>
+                <Text> {this.state.temperature} °C</Text>
             </View>
         );
     }
