@@ -9,6 +9,8 @@ const Dimensions = require('Dimensions');
 
 import {colors} from "../../utils/constants";
 import WeatherWidget from "./WeatherWidget";
+import LocationWidget from "./LocationWidget";
+import DateWidget from "./DateWidget";
 
 
 class UserHeader extends Component {
@@ -23,15 +25,15 @@ class UserHeader extends Component {
         };
 
         this.headerTextStyle = {
-            fontSize: 20,
-            marginLeft: 20
+            fontSize: 15,
         };
     }
 
     render() {
         return (
             <View style={this.headerStyle}>
-                <Text style={this.headerTextStyle}>Hello {this.props.name ? this.props.name : ''}</Text>
+                <DateWidget/>
+                <LocationWidget/>
                 <WeatherWidget/>
             </View>
         );
@@ -39,8 +41,6 @@ class UserHeader extends Component {
 }
 
 UserHeader.propTypes = {
-    name: PropTypes.string,
-
 };
 
 export default UserHeader;
