@@ -13,11 +13,8 @@
     "react-native-pathjs-charts": "0.0.31",
     "react-native-vector-icons": "^4.4.2",
     "react-navigation": "^1.0.0-beta.15",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "styled-components": "^2.2.2",
-    "prop-types": "latest"
+    "prop-types": "latest",
+    "styled-components": "^2.2.2"
   },
   "devDependencies": {
     "babel-jest": "21.2.0",
