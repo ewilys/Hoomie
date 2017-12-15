@@ -86,6 +86,62 @@ export function dateStrToInt(date) {
     return parseInt(dateInt);
 }
 
+
+/**
+ * Convert a string date to an interger such that "2017-11-19" becomes 19 Nov. 2017
+ *
+ * @param date = the string date to convert to literal date
+ * @returns {String}
+ */
+export function dateToLiteralString(date) {
+    let literalDate = date.split("-")[2] + " ";
+    switch(parseInt(date.split("-")[1])) {
+        case 1:
+            literalDate += "Jan. ";
+            break;
+        case 2:
+            literalDate += "Feb. ";
+            break;
+        case 3:
+            literalDate += "Mar. ";
+            break;
+        case 4:
+            literalDate += "Apr. ";
+            break;
+        case 5:
+            literalDate += "May ";
+            break;
+        case 6:
+            literalDate += "Jun. ";
+            break;
+        case 7:
+            literalDate += "Jul. ";
+            break;
+        case 8:
+            literalDate += "Aug. ";
+            break;
+        case 9:
+            literalDate += "Sep. ";
+            break;
+        case 10:
+            literalDate += "Oct. ";
+            break;
+        case 11:
+            literalDate += "Nov. ";
+            break;
+        case 12:
+            literalDate += "Dec. ";
+            break;
+        default:
+            return "N/A"
+    }
+
+    literalDate += date.split("-")[0];
+
+    return literalDate;
+
+}
+
 /**
  * Convert the current month to a litteral string. Ex. : 08th month is August
  *

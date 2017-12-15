@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const Dimensions = require('Dimensions');
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import {getCurrentDay} from "../../utils/methods";
+import {dateToLiteralString, getCurrentDay} from "../../utils/methods";
 
 
 class DateWidget extends Component {
@@ -32,7 +32,7 @@ class DateWidget extends Component {
 
     getDate() {
         this.setState({
-            date: getCurrentDay().replace("-","/")
+            date: dateToLiteralString(getCurrentDay())
         })
     }
 
