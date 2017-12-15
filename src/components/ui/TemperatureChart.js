@@ -49,15 +49,7 @@ class TemperatureChart extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(!this.props.homeRefreshing && nextProps.homeRefreshing) {
-            this.temperaturesFetchData();
-        }
-
-        if(this.state.isLoading) {
-            this.props.homeRefreshed();
-        }
-
-        if(this.props.room && nextProps.room && this.props.room !== nextProps.room) {
+        if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room)) {
             this.temperaturesFetchData();
         }
     }
@@ -118,7 +110,9 @@ class TemperatureChart extends Component {
             temperatures: TemperatureChart.dataToChart(temperatures.data),
             isLoading: false,
             hasErrored: false
-        })
+        });
+
+        this.props.homeRefreshed();
     }
 
     temperaturesAreLoading() {
@@ -173,7 +167,7 @@ class TemperatureChart extends Component {
     }
 
     render() {
-        if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0]) {
+        if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0] && !this.state.isLoading) {
             return (
                 <View style={this.chartStyle}>
                     <View style={this.headerStyle}>
