@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {dateStrToInt, getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods"
 import MeanValue from "./MeanValue";
+import { AreaChart } from 'react-native-svg-charts';
 import UndefinedChart from "./UndefinedChart";
 const Dimensions = require('Dimensions');
 
@@ -16,7 +17,7 @@ class TemperatureChart extends Component {
         super(props);
 
         this.state={
-            temperatures: [[]],
+            temperatures: [],
             isLoading: false,
             hasErrored: false,
         };
@@ -143,36 +144,38 @@ class TemperatureChart extends Component {
      * @param temperatures = the temperatures received from server
      */
     static dataToChart(temperatures) {
-        let chartData = [[]];
+        let chartData = [];
         let chartPoint = {date: 0, temperature: 0};
         //Checks that temperatures have values
         if(temperatures && temperatures.length > 0) {
             //Iterate through the temperatures
             for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
                 //Reset the chart point
-                chartPoint = {date: 0, temperature: 0};
+                //chartPoint = {date: 0, temperature: 0};
                 //Gives it the correct values of date and temperature, with one decimal
                 chartPoint.temperature = Math.round( temperatures[tempIndex].value * 10) / 10;
-                chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
-                chartData[0].push(chartPoint);
+                //chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
+                chartData.push(chartPoint.temperature);
             }
 
             //Make sure the points are in ascending order according to the date
-            chartData[0].sort(function(a, b) {
-                return a.date - b.date
-            });
+            // chartData[0].sort(function(a, b) {
+            //     return a.date - b.date
+            // });
         }
         return chartData;
     }
 
     render() {
-        if(this.state.temperatures && this.state.temperatures[0] && this.state.temperatures[0][0] && !this.state.isLoading) {
+        console.log(this.state.temperatures);
+        if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading) {
             return (
                 <View style={this.chartStyle}>
                     <View style={this.headerStyle}>
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                        <MeanValue values={this.state.temperatures[0]} unit="°C"/>
+                        <MeanValue values={this.state.temperatures} unit="°C"/>
                     </View>
+                    <AreaChart dataPoints={this.state.temperatures} style={ { height: 200 } }/>
                 </View>
             );
         } else {

@@ -43,7 +43,7 @@ class MeanValue extends Component {
     computeMeanValue(values) {
         let meanValue = 0;
         for(let valuesIndex = 0; valuesIndex < values.length; valuesIndex++) {
-            meanValue += parseFloat(values[valuesIndex].temperature);
+            meanValue += parseFloat(values[valuesIndex]);
         }
 
         meanValue /= values.length;
