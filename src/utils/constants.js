@@ -17,66 +17,12 @@ export const screenStyle = {
     backgroundColor: colors.WHITE
 };
 
-export const temperatureInitialState = {
-    temperature: {
-        year: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        },
-        month: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        },
-        day: {
-            hasErrored: false,
-            isLoading: false,
-            values: []
-        }
-    }
-};
-
 export const chartOptions = {
-    color: colors.HOOMIE_COLOR,
-    margin: {
-        top: 30,
-        left: 30,
-        bottom: 30,
-        right: 30
-    },
-    animate: {
-        type: 'delayed',
-        duration: 200
-    },
-    axisX: {
-        showAxis: true,
-        showLines: false,
-        showLabels: true,
-        showTicks: false,
-        zeroAxis: false,
-        orient: 'bottom',
-        label: {
-            fontFamily: 'Arial',
-            fontSize: 10,
-            fontWeight: true,
-            fill: '#34495E'
-        }
-    },
-    axisY: {
-        showAxis: true,
-        showLines: false,
-        showLabels: true,
-        showTicks: false,
-        zeroAxis: false,
-        orient: 'left',
-        label: {
-            fontFamily: 'Arial',
-            fontSize: 10,
-            fontWeight: true,
-            fill: '#34495E'
-        }
-    }
+    height: 300,
+    marginTop: 30,
+    marginBottom: 30,
+    marginLeft: 30,
+    marginRight: 30
 };
 
 export const WEATHER_API_KEY = "42bb67e6995a37350383335b8ad17aeb";

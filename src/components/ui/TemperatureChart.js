@@ -42,8 +42,8 @@ class TemperatureChart extends Component {
         };
 
         this.updatedChartOptions = chartOptions;
-        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
-        this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
+        // this.updatedChartOptions.width = Dimensions.get('window').width - 10;
+        // this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
     componentDidMount() {
@@ -147,25 +147,21 @@ class TemperatureChart extends Component {
      */
     static dataToChart(temperatures) {
         let chartData = [];
-        let chartPoint = {date: 0, temperature: 0};
+        let chartPoint = {temperature: 0};
         //Checks that temperatures have values
         if(temperatures && temperatures.length > 0) {
             //Iterate through the temperatures
             for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
-                //Reset the chart point
-                //chartPoint = {date: 0, temperature: 0};
-                //Gives it the correct values of date and temperature, with one decimal
                 chartPoint.temperature = Math.round( temperatures[tempIndex].value * 10) / 10;
-                //chartPoint.date = dateStrToInt(temperatures[tempIndex].date);
                 chartData.push(chartPoint.temperature);
             }
-
-            //Make sure the points are in ascending order according to the date
-            // chartData[0].sort(function(a, b) {
-            //     return a.date - b.date
-            // });
         }
         return chartData;
+    }
+
+    componentWillMount() {
+        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
+        this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
     render() {
@@ -177,7 +173,7 @@ class TemperatureChart extends Component {
                         <MeanValue values={this.state.temperatures} unit="°C"/>
                     </View>
                     <AreaChart dataPoints={this.state.temperatures}
-                               style={ { height: 200 } }
+                               style={chartOptions}
                                contentInset={ { top: 30, bottom: 30 } }
                                curve={shape.curveNatural}
                                renderGradient={ ({ id }) => (

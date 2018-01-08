@@ -6,35 +6,20 @@ import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import {chartOptions, colors} from "../../utils/constants";
 const Dimensions = require('Dimensions');
+import { AreaChart } from 'react-native-svg-charts';
+import * as shape from 'd3-shape'
 
 class UndefinedChart extends Component {
     constructor(props) {
         super(props);
 
-        this.undefinedValues=[[
-            {x: 0, y: 2},
-            {x: 1, y: 5.5},
-            {x: 2, y: 8},
-            {x: 3, y: 9.5},
-            {x: 4, y: 10},
-            {x: 5, y: 9.5},
-            {x: 6, y: 8},
-            {x: 7, y: 5.5},
-            {x: 8, y: 4},
-            {x: 9, y: 4.5},
-            {x: 10, y: 6},
-        ]];
+        this.undefinedValues=[2, 5.5, 8, 9.5, 10, 9.5, 8, 5.5, 4, 4.5, 6];
 
         this.meanValueStyle = {
             color: colors.UNDEFINED,
             fontSize: 15,
             fontWeight: '100',
             marginRight: 30
-        };
-
-        this.undefinedChartStyle = {
-            ...chartOptions,
-            color: colors.UNDEFINED,
         };
 
         this.chartStyle = {
@@ -53,10 +38,6 @@ class UndefinedChart extends Component {
             fontWeight: '100',
             marginLeft: 30
         };
-
-        this.updatedChartOptions = chartOptions;
-        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
-        this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
     render() {
@@ -66,6 +47,16 @@ class UndefinedChart extends Component {
                     <Text style={this.chartTitleStyle}>Undefined</Text>
                     <Text style={this.meanValueStyle}>Nan</Text>
                 </View>
+                <AreaChart dataPoints={this.undefinedValues}
+                           style={chartOptions}
+                           contentInset={ { top: 30, bottom: 30 } }
+                           curve={shape.curveNatural}
+                           svg={{
+                               fill: colors.UNDEFINED,
+                               stroke: colors.UNDEFINED,
+                           }}
+                           showGrid={false}
+                />
             </View>
         );
     }
