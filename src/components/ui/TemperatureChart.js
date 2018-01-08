@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import { Text, View } from "react-native";
 import PropTypes from 'prop-types';
-import { SmoothLine } from 'react-native-pathjs-charts'
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {dateStrToInt, getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods"
 import MeanValue from "./MeanValue";
@@ -174,7 +173,6 @@ class TemperatureChart extends Component {
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
                         <MeanValue values={this.state.temperatures[0]} unit="°C"/>
                     </View>
-                    <SmoothLine data={this.state.temperatures} options={this.updatedChartOptions} xKey='date' yKey='temperature'/>
                 </View>
             );
         } else {

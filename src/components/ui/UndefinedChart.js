@@ -4,7 +4,6 @@
 
 import React, { Component } from 'react';
 import { Text, View } from "react-native";
-import { SmoothLine } from 'react-native-pathjs-charts';
 import {chartOptions, colors} from "../../utils/constants";
 const Dimensions = require('Dimensions');
 
@@ -67,7 +66,6 @@ class UndefinedChart extends Component {
                     <Text style={this.chartTitleStyle}>Undefined</Text>
                     <Text style={this.meanValueStyle}>Nan</Text>
                 </View>
-                <SmoothLine data={this.undefinedValues} options={this.undefinedChartStyle} xKey='x' yKey='y'/>
             </View>
         );
     }
