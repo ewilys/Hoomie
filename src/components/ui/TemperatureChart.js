@@ -3,13 +3,15 @@
  **/
 
 import React, { Component } from 'react';
-import { Text, View } from "react-native";
+import {Text, View} from "react-native";
 import PropTypes from 'prop-types';
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {dateStrToInt, getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods"
 import MeanValue from "./MeanValue";
 import { AreaChart } from 'react-native-svg-charts';
+import * as shape from 'd3-shape'
 import UndefinedChart from "./UndefinedChart";
+import {LinearGradient, Stop} from "react-native-svg";
 const Dimensions = require('Dimensions');
 
 class TemperatureChart extends Component {
@@ -167,7 +169,6 @@ class TemperatureChart extends Component {
     }
 
     render() {
-        console.log(this.state.temperatures);
         if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading) {
             return (
                 <View style={this.chartStyle}>
@@ -175,7 +176,18 @@ class TemperatureChart extends Component {
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
                         <MeanValue values={this.state.temperatures} unit="°C"/>
                     </View>
-                    <AreaChart dataPoints={this.state.temperatures} style={ { height: 200 } }/>
+                    <AreaChart dataPoints={this.state.temperatures}
+                               style={ { height: 200 } }
+                               contentInset={ { top: 30, bottom: 30 } }
+                               curve={shape.curveNatural}
+                               renderGradient={ ({ id }) => (
+                                   <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
+                                       <Stop offset={ '0%' } stopColor={ 'rgb(233, 86, 95)' } stopOpacity={ 0.8 }/>
+                                       <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
+                                   </LinearGradient>
+                               ) }
+                               showGrid={false}
+                    />
                 </View>
             );
         } else {
