@@ -38,11 +38,15 @@ class DateWidget extends Component {
 
     render() {
         return (
-            <View style={this.dateStyle}>
+            <View style={this.dateStyle} ref='dateContainer'>
                 <MaterialIcons name="date-range" size={30} color={"#555555"}/>
                 <Text> {this.state.date}</Text>
             </View>
         );
+    }
+
+    setNativeProps(nativeProps) {
+        this.refs.dateContainer.setNativeProps(nativeProps);
     }
 }
 
