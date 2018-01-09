@@ -10,8 +10,15 @@ class Monitoring extends Component {
         super();
 
         this.state={
-            isRefreshing: false
+            isRefreshing: false,
+            date: getCurrentDay()
         }
+    }
+
+    _onDateChange(date) {
+        this.setState({
+            date: date.dateString
+        });
     }
 
     _onRefresh() {
@@ -25,10 +32,10 @@ class Monitoring extends Component {
     render() {
         return (
             <ScrollView style={screenStyle} refreshControl={<RefreshControl refreshing={this.state.isRefreshing} onRefresh={this._onRefresh.bind(this)} />}>
-                <UserHeader/>
-                <TemperatureChart room="204" period="year" chartTitle={getCurrentYear() + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChart room="204" period="month" chartTitle={getCurrentMonthAsStr() + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChart room="204" period="day" chartTitle={getCurrentMonthAsStr()+ " " + getCurrentDay().split("-")[2] + "th" + " Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <UserHeader onDateChange={this._onDateChange.bind(this)} currentDate={this.state.date}/>
+                <TemperatureChart room="204" period="year" fetchingDate={this.state.date.split("-")[0]} chartTitle={this.state.date.split("-")[0] + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChart room="204" period="month" fetchingDate={this.state.date.split("-")[0] + "-" + this.state.date.split("-")[1]} chartTitle={this.state.date.split("-")[0] + "-" + this.state.date.split("-")[1] + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <TemperatureChart room="204" period="day" fetchingDate={this.state.date} chartTitle={this.state.date + " Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
             </ScrollView>
         );
     }

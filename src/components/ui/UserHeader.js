@@ -11,7 +11,8 @@ import {colors} from "../../utils/constants";
 import WeatherWidget from "./WeatherWidget";
 import LocationWidget from "./LocationWidget";
 import DateWidget from "./DateWidget";
-import {Calendar} from 'react-native-calendars';
+import {Calendar, CalendarList} from 'react-native-calendars';
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 
 class UserHeader extends Component {
@@ -34,14 +35,22 @@ class UserHeader extends Component {
         };
     }
 
+    changeDate(day) {
+        this.props.onDateChange(day);
+        this.setState({
+            modalVisible: false
+        });
+    }
+
     render() {
         return (
             <View style={this.headerStyle}>
-                <Modal visible={this.state.modalVisible} onRequestClose={() => {this.setState({modalVisible: false})}}>
-                    <Calendar/>
+                <Modal animationType='slide' visible={this.state.modalVisible} onRequestClose={() => {this.setState({modalVisible: false})}}>
+                    <CalendarList current={this.props.currentDate} onDayPress={(day) => this.changeDate(day)}/>
+                    <MaterialIcons style={{marginLeft: Dimensions.get('window').width * 0.5 - 50}} name="keyboard-arrow-down" size={100} color={"#CCC"} onPress={() => {this.setState({modalVisible: false})}}/>
                 </Modal>
-                <TouchableHighlight onPress={() => {this.setState({modalVisible: true})}} >
-                    <DateWidget/>
+                <TouchableHighlight onPress={() => {this.setState({modalVisible: true})}} underlayColor="#fff">
+                    <DateWidget date={this.props.currentDate}/>
                 </TouchableHighlight>
                 <LocationWidget/>
                 <WeatherWidget/>
@@ -51,6 +60,8 @@ class UserHeader extends Component {
 }
 
 UserHeader.propTypes = {
+    onDateChange: PropTypes.func.isRequired,
+    currentDate: PropTypes.string.isRequired
 };
 
 export default UserHeader;

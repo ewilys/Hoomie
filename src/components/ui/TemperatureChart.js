@@ -51,7 +51,7 @@ class TemperatureChart extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room)) {
+        if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room) || (this.props.fetchingDate !== nextProps.fetchingDate)) {
             this.temperaturesFetchData();
         }
     }
@@ -62,13 +62,13 @@ class TemperatureChart extends Component {
             fetchingAddress += "/admin/temperature/average"+this.props.period[0].toUpperCase() + this.props.period.slice(1)+"/";
             switch(this.props.period) {
                 case "year":
-                    fetchingAddress += getCurrentYear();
+                    fetchingAddress += this.props.fetchingDate.split("-")[0];
                     break;
                 case  "month":
-                    fetchingAddress += getCurrentMonth();
+                    fetchingAddress += this.props.fetchingDate.split("-")[0] + "-" + this.props.fetchingDate.split("-")[1];
                     break;
                 case "day":
-                    fetchingAddress += getCurrentDay();
+                    fetchingAddress += this.props.fetchingDate;
                     break;
             }
             fetchingAddress += "/"+this.props.room
@@ -77,13 +77,13 @@ class TemperatureChart extends Component {
             fetchingAddress += "/"+this.props.room+"/temperature/"+this.props.period+"/";
             switch(this.props.period) {
                 case "year":
-                    fetchingAddress += getCurrentYear();
+                    fetchingAddress += this.props.fetchingDate.split("-")[0];
                     break;
                 case  "month":
-                    fetchingAddress += getCurrentMonth();
+                    fetchingAddress += this.props.fetchingDate.split("-")[0] + "-" + this.props.fetchingDate.split("-")[1];
                     break;
                 case "day":
-                    fetchingAddress += getCurrentDay();
+                    fetchingAddress += this.props.fetchingDate;
                     break;
             }
         }
@@ -190,6 +190,7 @@ class TemperatureChart extends Component {
 TemperatureChart.propTypes = {
     room: PropTypes.string.isRequired,
     period: PropTypes.string.isRequired,
+    fetchingDate: PropTypes.string.isRequired,
     chartTitle: PropTypes.string,
     homeRefreshing: PropTypes.bool,
     homeRefreshed: PropTypes.func,

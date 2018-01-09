@@ -30,13 +30,20 @@ class DateWidget extends Component {
         this.getDate();
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.props.date !== nextProps.date) {
+            this.getDate();
+        }
+    }
+
     getDate() {
         this.setState({
-            date: dateToLiteralString(getCurrentDay())
+            date: dateToLiteralString(this.props.date)
         })
     }
 
     render() {
+        console.log(this.props.date);
         return (
             <View style={this.dateStyle} ref='dateContainer'>
                 <MaterialIcons name="date-range" size={30} color={"#555555"}/>
@@ -51,6 +58,7 @@ class DateWidget extends Component {
 }
 
 DateWidget.propTypes = {
+    date: PropTypes.string.isRequired
 };
 
 export default DateWidget;
