@@ -21,8 +21,6 @@ export const chartOptions = {
     height: 300,
     marginTop: 30,
     marginBottom: 30,
-    marginLeft: 30,
-    marginRight: 30
 };
 
 export const WEATHER_API_KEY = "42bb67e6995a37350383335b8ad17aeb";

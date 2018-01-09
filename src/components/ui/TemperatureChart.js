@@ -159,11 +159,6 @@ class TemperatureChart extends Component {
         return chartData;
     }
 
-    componentWillMount() {
-        this.updatedChartOptions.width = Dimensions.get('window').width - 10;
-        this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
-    }
-
     render() {
         if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading) {
             return (
