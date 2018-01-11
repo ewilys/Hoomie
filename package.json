@@ -16,7 +16,7 @@
     "react-native-svg": "latest",
     "react-native-svg-charts": "^2.0.1",
     "react-native-vector-icons": "^4.4.2",
-    "react-navigation": "^1.0.0-beta.21",
+    "react-navigation": "1.0.0-beta.21",
     "styled-components": "^2.2.2"
   },
   "devDependencies": {
