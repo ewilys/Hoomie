@@ -66,8 +66,11 @@ class TemperatureChart extends Component {
     }
 
     componentDidUpdate(){
-        if(this.state.updates)
+        if(this.state.updates){
             this.temperaturesFetchData();
+            this.setState({updates:false});
+        }
+
     }
 
     getFetchingAddress() {

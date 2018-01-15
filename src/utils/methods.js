@@ -38,7 +38,10 @@ export function getCurrentDay() {
     let date = new Date();
     let dayStr = "";
 
-    dayStr += (date.getYear() + 1900) + "-";
+    dayStr += (date.getFullYear()) + "-";
+    if(date.getMonth()+1<10){
+        dayStr += '0';
+    }
     dayStr += (date.getMonth() + 1)+"-";
     dayStr += (date.getDate());
 
@@ -181,4 +184,17 @@ export function getCurrentMonthAsStr() {
         default:
             return "N/A"
     }
+}
+
+export function dateToString(date){
+    var d = date.year+'-';
+    if(date.month<10){
+        d += '0';
+    }
+    d += date.month+'-';
+    if(date.day<10){
+        d += '0';
+    }
+    d += date.day;
+    return d;
 }

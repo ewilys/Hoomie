@@ -16,7 +16,8 @@ class DateWidget extends Component {
         super(props);
 
         this.state = {
-            date: ""
+            date: "",
+            updates: false
         };
 
         this.dateStyle = {
@@ -32,7 +33,16 @@ class DateWidget extends Component {
 
     componentWillReceiveProps(nextProps) {
         if(this.props.date !== nextProps.date) {
+            this.setState({updates:true})
+        }else{
+            this.setState({updates:false})
+        }
+    }
+
+    componentDidUpdate(){
+        if(this.state.updates){
             this.getDate();
+            this.setState({updates:false})
         }
     }
 

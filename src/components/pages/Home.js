@@ -3,7 +3,7 @@ import {ScrollView} from "react-native";
 import {screenStyle} from "../../utils/constants";
 import Advice from "../ui/Advice";
 import UserHeader from "../ui/UserHeader";
-import {getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods";
+import {dateToString, getCurrentDay, getCurrentMonth, getCurrentYear} from "../../utils/methods";
 
 class HomeScreen extends Component {
 
@@ -11,13 +11,14 @@ class HomeScreen extends Component {
         super();
 
         this.state = {
-            date: getCurrentDay()
+            date: getCurrentDay(),
         }
     }
 
     _onDateChange(date) {
+
         this.setState({
-            date: date.dateString
+            date: dateToString(date)
         });
     }
 

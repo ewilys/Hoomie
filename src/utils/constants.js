@@ -14,6 +14,8 @@ export const colors = {
 export const serverIp = "hoomieserver.herokuapp.com";
 
 export const screenStyle = {
+    flex:1,
+    flexDirection:'column',
     backgroundColor: colors.WHITE
 };
 
