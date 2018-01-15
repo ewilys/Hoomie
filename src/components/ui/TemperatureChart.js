@@ -22,6 +22,7 @@ class TemperatureChart extends Component {
             temperatures: [],
             isLoading: false,
             hasErrored: false,
+            updates : false,
         };
 
         this.chartStyle = {
@@ -52,8 +53,21 @@ class TemperatureChart extends Component {
 
     componentWillReceiveProps(nextProps) {
         if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room) || (this.props.fetchingDate !== nextProps.fetchingDate)) {
-            this.temperaturesFetchData();
+            this.setState({
+                updates:true,
+            });
+            //this.temperaturesFetchData();
         }
+        else{
+            this.setState({
+                updates:false,
+            })
+        }
+    }
+
+    componentDidUpdate(){
+        if(this.state.updates)
+            this.temperaturesFetchData();
     }
 
     getFetchingAddress() {
@@ -182,7 +196,7 @@ class TemperatureChart extends Component {
                 </View>
             );
         } else {
-            return(<UndefinedChart/>);
+            return(<UndefinedChart period={this.props.period}/>);
         }
     }
 }

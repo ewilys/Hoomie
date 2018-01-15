@@ -7,6 +7,7 @@ import { Text, View } from "react-native";
 import {chartOptions, colors} from "../../utils/constants";
 const Dimensions = require('Dimensions');
 import { AreaChart } from 'react-native-svg-charts';
+import PropTypes from 'prop-types';
 import * as shape from 'd3-shape'
 
 class UndefinedChart extends Component {
@@ -44,8 +45,7 @@ class UndefinedChart extends Component {
         return (
             <View style={this.chartStyle}>
                 <View style={this.headerStyle}>
-                    <Text style={this.chartTitleStyle}>Undefined</Text>
-                    <Text style={this.meanValueStyle}>Nan</Text>
+                    <Text style={this.chartTitleStyle}>No temperatures available for this {this.props.period} </Text>
                 </View>
                 <AreaChart dataPoints={this.undefinedValues}
                            style={chartOptions}
@@ -60,6 +60,12 @@ class UndefinedChart extends Component {
             </View>
         );
     }
+
+
 }
+
+UndefinedChart.propTypes = {
+    period: PropTypes.string.isRequired,
+};
 
 export default UndefinedChart;
