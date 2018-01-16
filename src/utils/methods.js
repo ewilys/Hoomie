@@ -158,7 +158,14 @@ export function getCurrentMonthAsStr() {
 export function getDayAsStr(date){
     date = date.split("-");
 
-    let dateNb = parseInt(date[2]);
+    var dateNb;
+    if(date.length>2){
+        dateNb = parseInt(date[2]);
+    }
+    else {
+        dateNb = parseInt(date[0]);
+    }
+
 
     switch(dateNb) {
         case 1:
@@ -177,6 +184,48 @@ export function getDayAsStr(date){
             return dateNb+"st";
         default:
             return dateNb+"th";
+    }
+}
+export function getMonthAsShortStr(monthStr) {
+    //monthStr = year-month
+
+    monthStr = monthStr.split("-");
+    var monthNb;
+    if(monthStr.length>1){
+        monthNb = parseInt(monthStr[1]);
+    }
+    else{
+        monthNb = parseInt(monthStr[0]);
+    }
+
+
+    switch(monthNb) {
+        case 1:
+            return "Jan";
+        case 2:
+            return "Feb";
+        case 3:
+            return "Mar";
+        case 4:
+            return "Apr";
+        case 5:
+            return "May";
+        case 6:
+            return "Jun";
+        case 7:
+            return "Jul";
+        case 8:
+            return "Aug";
+        case 9:
+            return "Sep";
+        case 10:
+            return "Oct";
+        case 11:
+            return "Nov";
+        case 12:
+            return "Dec";
+        default:
+            return "N/A"
     }
 }
 export function getMonthAsStr(monthStr) {

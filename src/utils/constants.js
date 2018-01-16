@@ -21,6 +21,7 @@ export const screenStyle = {
 
 export const chartOptions = {
     height: 300,
+    width : 300,
     marginTop: 30,
     marginBottom: 30,
 };

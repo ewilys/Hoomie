@@ -21,6 +21,13 @@ class University extends Component {
             justifyContent: 'space-around',
             alignItems: 'center',
         };
+
+        this.displayStyle={
+            flex:1,
+            flexDirection:'column',
+            justifyContent:'space-around',
+            alignItems: 'center',
+        }
     }
 
     _onDateChange(date) {
@@ -48,9 +55,11 @@ class University extends Component {
                     </Picker>
                     <CalendarWidget onDateChange={this._onDateChange.bind(this)} currentDate={this.state.date}/>
                 </View>
-                <TemperatureChart admin={true} period="year" fetchingDate={this.state.date} room={this.state.room} chartTitle={this.state.date.split("-")[0] + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChart admin={true} period="month" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date) + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
-                <TemperatureChart admin={true} period="day" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date)+" "+getDayAsStr(this.state.date)+"  Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                <View style={this.displayStyle}>
+                    <TemperatureChart admin={true} period="year" fetchingDate={this.state.date} room={this.state.room} chartTitle={this.state.date.split("-")[0] + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                    <TemperatureChart admin={true} period="month" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date) + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                    <TemperatureChart admin={true} period="day" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date)+" "+getDayAsStr(this.state.date)+"  Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
+                </View>
             </ScrollView>
         );
     }
