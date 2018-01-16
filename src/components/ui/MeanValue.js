@@ -16,10 +16,11 @@ class MeanValue extends Component {
         };
 
         this.meanValueStyle = {
+            flex:1,
             color: colors.HOOMIE_COLOR,
             fontSize: 15,
             fontWeight: '100',
-            marginRight: 30
+            //marginRight: 30
         };
     }
 

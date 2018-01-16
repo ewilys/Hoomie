@@ -21,6 +21,7 @@ class DateWidget extends Component {
         };
 
         this.dateStyle = {
+            flex:1,
             flexDirection: 'row',
             alignItems: 'center',
         };

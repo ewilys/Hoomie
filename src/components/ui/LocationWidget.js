@@ -22,7 +22,9 @@ class LocationWidget extends Component {
         };
 
         this.locationStyle = {
+            flex:1,
             flexDirection: 'row',
+            justifyContent:'center',
             alignItems: 'center',
         };
 

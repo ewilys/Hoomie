@@ -152,6 +152,35 @@ export function dateToLiteralString(date) {
  */
 export function getCurrentMonthAsStr() {
     let monthStr = getCurrentMonth();
+   return getMonthAsStr(monthStr);
+}
+
+export function getDayAsStr(date){
+    date = date.split("-");
+
+    let dateNb = parseInt(date[2]);
+
+    switch(dateNb) {
+        case 1:
+            return dateNb+"st";
+        case 2:
+            return dateNb+"nd";
+        case 3:
+            return dateNb+"rd";
+        case 21:
+            return dateNb+"st";
+        case 22:
+            return dateNb+"nd";
+        case 23:
+            return dateNb+"rd";
+        case 31:
+            return dateNb+"st";
+        default:
+            return dateNb+"th";
+    }
+}
+export function getMonthAsStr(monthStr) {
+    //monthStr = year-month
     monthStr = monthStr.split("-");
 
     let monthNb = parseInt(monthStr[1]);
@@ -185,7 +214,6 @@ export function getCurrentMonthAsStr() {
             return "N/A"
     }
 }
-
 export function dateToString(date){
     var d = date.year+'-';
     if(date.month<10){

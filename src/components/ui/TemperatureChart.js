@@ -26,16 +26,19 @@ class TemperatureChart extends Component {
         };
 
         this.chartStyle = {
+            flex:1,
             flexDirection: 'column',
             alignContent: 'center'
         };
 
         this.headerStyle = {
+            flex :1,
             flexDirection: 'row',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
         };
 
         this.chartTitleStyle = {
+            flex:1,
             color: colors.HOOMIE_COLOR,
             fontSize: 15,
             fontWeight: '100',
