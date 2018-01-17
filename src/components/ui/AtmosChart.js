@@ -25,15 +25,16 @@ class AtmosphereChart extends Component {
             co: [],
             no2:[],
             dates:[],
+            displayNo2 :false,
             isLoading: false,
             hasErrored: false,
+            displayChart:false,
             updates : false,
         };
 
         this.chartStyle = {
             flex:1,
             flexDirection: 'column',
-            alignItems:'center',
             marginTop: 30,
             marginBottom:30,
         };
@@ -50,6 +51,22 @@ class AtmosphereChart extends Component {
             fontSize: 15,
             fontWeight: '100',
             marginLeft: 30,
+        };
+
+        this.toggleText={
+            flex:1,
+            color:colors.HOOMIE_300,
+            fontSize: 12,
+            fontWeight: 'bold',
+
+        };
+
+        this.headerToggle={
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'center',
+            alignItems:'center',
+            marginBottom: 20,
         };
 
         this.contentInset={
@@ -69,6 +86,7 @@ class AtmosphereChart extends Component {
         if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room) || (this.props.fetchingDate !== nextProps.fetchingDate)) {
             this.setState({
                 updates:true,
+                displayChart:false,
             });
             //this.atmospheresFetchData();
         }
@@ -123,6 +141,9 @@ class AtmosphereChart extends Component {
     }
 
     atmospheresFetchData(subparameters) {
+        this.setState({
+            displayChart:false,
+        });
         let fetchingAddress = this.getFetchingAddress();
         fetch(`http://${serverIp}` + fetchingAddress)
             .then((response) => {
@@ -144,7 +165,8 @@ class AtmosphereChart extends Component {
             no2: AtmosphereChart.valueToChart(atmospheres.data,2),
             dates: AtmosphereChart.datesToChart(atmospheres.data,this.props.period),
             isLoading: false,
-            hasErrored: false
+            hasErrored: false,
+            displayChart: true,
         });
 
         this.props.homeRefreshed();
@@ -232,35 +254,61 @@ class AtmosphereChart extends Component {
     }
 
     render() {
-        if(this.state.co && this.state.no2 && this.state.no2[0] && this.state.co[0] && !this.state.isLoading) {
+        if(this.state.co && this.state.no2 && this.state.no2[0] && this.state.co[0] && !this.state.isLoading && this.state.displayChart) {
             return (
                 <View style={this.chartStyle}>
-                    <Switch/>
+                    <View style={this.headerToggle}>
+                        <Text style={[this.toggleText,{textAlign:'right'}]}> CO </Text>
+                        <Switch value={this.state.displayNo2} onValueChange={(value)=> this.setState({displayNo2:value})}/>
+                        <Text style={this.toggleText}> NO2 </Text>
+                    </View>
                     <View style={this.headerStyle}>
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                        <MeanValue values={this.state.co} unit="ppm"/>
+                        {this.state.displayNo2 ? (<MeanValue values={this.state.no2} unit="ppm"/>) :  (<MeanValue values={this.state.co} unit="ppm"/>)}
                     </View>
-                    <View style={ { height:300,width:350,flexDirection: 'row' } }>
-                        <YAxis dataPoints={this.state.co} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ppm`}/>
-                        <AreaChart dataPoints={this.state.co}
-                                   style={chartOptions}
-                                   contentInset={ this.contentInset}
-                                   curve={shape.curveNatural}
-                                   renderGradient={ ({ id }) => (
-                                       <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
-                                           <Stop offset={ '0%' } stopColor={ 'rgb(95, 86, 233)' } stopOpacity={ 0.8 }/>
-                                           <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
-                                       </LinearGradient>
-                                   ) }
-                                   showGrid={false}
-                        />
-                    </View>
+
+                        {this.state.displayNo2 ?
+                            <View style={ { height:300,width:350,flexDirection: 'row' } }>
+                                <YAxis dataPoints={this.state.no2} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ppm`}/>
+                                 <AreaChart dataPoints={this.state.no2}
+                                        style={chartOptions}
+                                        contentInset={ this.contentInset}
+                                        curve={shape.curveNatural}
+                                        renderGradient={ ({ id }) => (
+                                            <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
+                                                <Stop offset={ '0%' } stopColor={ 'rgb(95, 86, 233)' } stopOpacity={ 0.8 }/>
+                                                <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
+                                            </LinearGradient>) }
+                                        showGrid={false}
+                                 />
+                            </View>
+                            :
+                            <View style={ { height:300,width:350,flexDirection: 'row' } }>
+                                <YAxis dataPoints={this.state.co} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ppm`}/>
+                                <AreaChart dataPoints={this.state.co}
+                                          style={chartOptions}
+                                          contentInset={ this.contentInset}
+                                          curve={shape.curveNatural}
+                                          renderGradient={ ({ id }) => (
+                                              <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
+                                                  <Stop offset={ '0%' } stopColor={ 'rgb(95, 200, 233)' } stopOpacity={ 0.8 }/>
+                                                  <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
+                                              </LinearGradient>
+                                          ) }
+                                          showGrid={false}
+                                />
+                            </View>
+                        }
+
+
                     <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
 
                 </View>
             );
-        } else {
-            return(<UndefinedChart period={this.props.period} data={"atmospheres"}/>);
+        } else if(!this.state.displayChart) {
+            return null;
+        }else{
+            return (<UndefinedChart period={this.props.period} data={"atmospheres"}/>);
         }
     }
 }

@@ -28,12 +28,13 @@ class TemperatureChart extends Component {
             isLoading: false,
             hasErrored: false,
             updates : false,
+            displayChart :false,
         };
 
         this.chartStyle = {
             flex:1,
             flexDirection: 'column',
-            alignItems:'center',
+           // alignItems:'center',
             marginTop: 30,
             marginBottom:30,
         };
@@ -71,6 +72,7 @@ class TemperatureChart extends Component {
         if((!this.props.homeRefreshing && nextProps.homeRefreshing) || (this.props.room && nextProps.room && this.props.room !== nextProps.room) || (this.props.fetchingDate !== nextProps.fetchingDate)) {
             this.setState({
                 updates:true,
+                displayChart:false,
             });
             //this.temperaturesFetchData();
         }
@@ -125,6 +127,9 @@ class TemperatureChart extends Component {
     }
 
     temperaturesFetchData(subparameters) {
+        this.setState({
+            displayChart : false,
+        });
         let fetchingAddress = this.getFetchingAddress();
         fetch(`http://${serverIp}` + fetchingAddress)
             .then((response) => {
@@ -145,7 +150,8 @@ class TemperatureChart extends Component {
             temperatures: TemperatureChart.valueToChart(temperatures.data),
             dates: TemperatureChart.datesToChart(temperatures.data,this.props.period),
             isLoading: false,
-            hasErrored: false
+            hasErrored: false,
+            displayChart : true,
         });
 
         this.props.homeRefreshed();
@@ -229,7 +235,7 @@ class TemperatureChart extends Component {
     }
 
     render() {
-        if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading) {
+        if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading && this.state.displayChart) {
             return (
                 <View style={this.chartStyle}>
                     <View style={this.headerStyle}>
@@ -255,7 +261,9 @@ class TemperatureChart extends Component {
 
                 </View>
             );
-        } else {
+        } else if(!this.state.displayChart){
+            return null;
+        }else{
             return(<UndefinedChart period={this.props.period} data={"temperatures"}/>);
         }
     }
