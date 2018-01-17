@@ -198,7 +198,7 @@ export function getMonthAsShortStr(monthStr) {
         monthNb = parseInt(monthStr[0]);
     }
 
-
+    console.log(monthNb);
     switch(monthNb) {
         case 1:
             return "Jan";

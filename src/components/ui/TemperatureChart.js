@@ -141,7 +141,7 @@ class TemperatureChart extends Component {
     temperaturesFetchSuccess(temperatures, subparameters) {
         this.setState({
             temperatures: TemperatureChart.valueToChart(temperatures.data),
-            dates: TemperatureChart.datesToChart(temperatures.data),
+            dates: TemperatureChart.datesToChart(temperatures.data,this.props.period),
             isLoading: false,
             hasErrored: false
         });
@@ -196,26 +196,29 @@ class TemperatureChart extends Component {
      *
      * @param temperatures = the [] of temperatures received from server
      */
-    static datesToChart(array) {
+    static datesToChart(array,period) {
         let chartData = [];
-        let chartPoint = {date: 0};
+        let chartPoint = {date: '0'};
         //Checks that temperatures have values
-        console.log(array);
+
         if(array && array.length > 0) {
             //Iterate through the temperatures
             for (let dateIndex = 0; dateIndex < array.length; dateIndex++) {
-                /*switch(this.props.period){
+                switch(period){
                     case 'year':
+
                         chartPoint.date =  getMonthAsShortStr(array[dateIndex].date) ;
                         break;
                     case 'month':
+
                         chartPoint.date =  getDayAsStr(array[dateIndex].date) ;
                         break;
                     default :
-                        chartPoint.date =  array[dateIndex].date+"h" ;
+                        console.log("day");
+                        chartPoint.date =  parseInt(array[dateIndex].date)+"h" ;
                         break;
-                }*/
-                chartPoint.date = array[dateIndex].date;
+                }
+                //chartPoint.date = array[dateIndex].date;
                 chartData.push(chartPoint.date);
             }
         }
