@@ -14,7 +14,7 @@ import MeanValue from "./MeanValue";
 import { AreaChart, YAxis,XAxis } from 'react-native-svg-charts';
 import * as shape from 'd3-shape'
 import UndefinedChart from "./UndefinedChart";
-import {LinearGradient, Stop} from "react-native-svg";
+import {LinearGradient, Stop,Circle} from "react-native-svg";
 const Dimensions = require('Dimensions');
 
 class AtmosphereChart extends Component {
@@ -160,14 +160,27 @@ class AtmosphereChart extends Component {
     }
 
     atmospheresFetchSuccess(atmospheres, subparameters) {
-        this.setState({
-            co: AtmosphereChart.valueToChart(atmospheres.data,1),
-            no2: AtmosphereChart.valueToChart(atmospheres.data,2),
-            dates: AtmosphereChart.datesToChart(atmospheres.data,this.props.period),
-            isLoading: false,
-            hasErrored: false,
-            displayChart: true,
-        });
+        atmospheres.data.sort((a,b)=> {return parseInt(a.date)-parseInt(b.date)});
+        if(this.props.room == "all"){
+            this.setState({
+                co: AtmosphereChart.valueToChart(atmospheres.data,1),
+                no2: AtmosphereChart.valueToChart(atmospheres.data,2),
+                dates: AtmosphereChart.datesToChart(atmospheres.data,this.props.period),
+                isLoading: false,
+                hasErrored: false,
+                displayChart: true,
+            });
+        }
+        else{
+            this.setState({
+                co: AtmosphereChart.valueToChart(atmospheres.data,1),
+                no2: AtmosphereChart.valueToChart(atmospheres.data,2),
+                dates: AtmosphereChart.datesToChart(atmospheres.data,this.props.period),
+                isLoading: false,
+                hasErrored: false,
+                displayChart: true,
+            });
+        }
 
         this.props.homeRefreshed();
     }
@@ -280,6 +293,16 @@ class AtmosphereChart extends Component {
                                                 <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
                                             </LinearGradient>) }
                                         showGrid={false}
+                                            renderDecorator={ ({ x, y, index, value }) => (
+                                                <Circle
+                                                    key={ index }
+                                                    cx={ x(index) }
+                                                    cy={ y(value) }
+                                                    r={ 3 }
+                                                    stroke={ 'rgb(95, 86, 233)' }
+                                                    fill={ 'white' }
+                                                />
+                                            ) }
                                  />
                             </View>
                             :
@@ -296,6 +319,16 @@ class AtmosphereChart extends Component {
                                               </LinearGradient>
                                           ) }
                                           showGrid={false}
+                                           renderDecorator={ ({ x, y, index, value }) => (
+                                               <Circle
+                                                   key={ index }
+                                                   cx={ x(index) }
+                                                   cy={ y(value) }
+                                                   r={ 3 }
+                                                   stroke={ 'rgb(95, 200, 233)' }
+                                                   fill={ 'white' }
+                                               />
+                                           ) }
                                 />
                             </View>
                         }

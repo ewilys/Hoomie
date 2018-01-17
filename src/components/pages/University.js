@@ -13,7 +13,7 @@ class University extends Component {
         this.state={
             isRefreshing: false,
             date: getCurrentDay(),
-            room: "204"
+            room: "all"
         };
 
         this.headerUniversityStyle={
