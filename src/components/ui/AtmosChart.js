@@ -1,14 +1,13 @@
 /**
- Created by Guillaume Ferron on the 10/24/2017
- Modified by Lisa Martini since 01/15/2018
+ Created by Lisa Martini on the 01/17/2018
  **/
 
 import React, { Component } from 'react';
-import {Text, View} from "react-native";
+import {Text, View,Switch} from "react-native";
 import PropTypes from 'prop-types';
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {
-    dateStrToInt, getCurrentDay, getCurrentMonth, getCurrentYear, getDayAsStr,
+    getDayAsStr,
     getMonthAsShortStr
 } from "../../utils/methods"
 import MeanValue from "./MeanValue";
@@ -18,12 +17,13 @@ import UndefinedChart from "./UndefinedChart";
 import {LinearGradient, Stop} from "react-native-svg";
 const Dimensions = require('Dimensions');
 
-class TemperatureChart extends Component {
+class AtmosphereChart extends Component {
     constructor(props) {
         super(props);
 
         this.state={
-            temperatures: [],
+            co: [],
+            no2:[],
             dates:[],
             isLoading: false,
             hasErrored: false,
@@ -59,12 +59,10 @@ class TemperatureChart extends Component {
 
 
         this.updatedChartOptions = chartOptions;
-        // this.updatedChartOptions.width = Dimensions.get('window').width - 10;
-        // this.updatedChartOptions.height = 0.4 * Dimensions.get('window').height;
     }
 
     componentDidMount() {
-        this.temperaturesFetchData();
+        this.atmospheresFetchData();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -72,7 +70,7 @@ class TemperatureChart extends Component {
             this.setState({
                 updates:true,
             });
-            //this.temperaturesFetchData();
+            //this.atmospheresFetchData();
         }
         else{
             this.setState({
@@ -83,7 +81,7 @@ class TemperatureChart extends Component {
 
     componentDidUpdate(){
         if(this.state.updates){
-            this.temperaturesFetchData();
+            this.atmospheresFetchData();
             this.setState({updates:false});
         }
 
@@ -92,7 +90,7 @@ class TemperatureChart extends Component {
     getFetchingAddress() {
         let fetchingAddress = "";
         if(this.props.admin) {
-            fetchingAddress += "/admin/temperature/average"+this.props.period[0].toUpperCase() + this.props.period.slice(1)+"/";
+            fetchingAddress += "/admin/atmosphere/average"+this.props.period[0].toUpperCase() + this.props.period.slice(1)+"/";
             switch(this.props.period) {
                 case "year":
                     fetchingAddress += this.props.fetchingDate.split("-")[0];
@@ -107,7 +105,7 @@ class TemperatureChart extends Component {
             fetchingAddress += "/"+this.props.room
         }
         else {
-            fetchingAddress += "/"+this.props.room+"/temperature/"+this.props.period+"/";
+            fetchingAddress += "/"+this.props.room+"/atmosphere/"+this.props.period+"/";
             switch(this.props.period) {
                 case "year":
                     fetchingAddress += this.props.fetchingDate.split("-")[0];
@@ -124,26 +122,27 @@ class TemperatureChart extends Component {
         return fetchingAddress;
     }
 
-    temperaturesFetchData(subparameters) {
+    atmospheresFetchData(subparameters) {
         let fetchingAddress = this.getFetchingAddress();
         fetch(`http://${serverIp}` + fetchingAddress)
             .then((response) => {
                 if (!response.ok) {
                     throw Error(response.statusText);
                 }
-                this.temperaturesAreLoading();
+                this.atmospheresAreLoading();
 
                 return response;
             })
             .then((response) => response.json())
-            .then((temperatures) => this.temperaturesFetchSuccess(temperatures, subparameters))
-            .catch(() => this.temperaturesHaveErrored());
+            .then((atmospheres) => this.atmospheresFetchSuccess(atmospheres, subparameters))
+            .catch(() => this.atmospheresHaveErrored());
     }
 
-    temperaturesFetchSuccess(temperatures, subparameters) {
+    atmospheresFetchSuccess(atmospheres, subparameters) {
         this.setState({
-            temperatures: TemperatureChart.valueToChart(temperatures.data),
-            dates: TemperatureChart.datesToChart(temperatures.data,this.props.period),
+            co: AtmosphereChart.valueToChart(atmospheres.data,1),
+            no2: AtmosphereChart.valueToChart(atmospheres.data,2),
+            dates: AtmosphereChart.datesToChart(atmospheres.data,this.props.period),
             isLoading: false,
             hasErrored: false
         });
@@ -151,14 +150,14 @@ class TemperatureChart extends Component {
         this.props.homeRefreshed();
     }
 
-    temperaturesAreLoading() {
+    atmospheresAreLoading() {
         this.setState({
             isLoading: true
         })
     }
 
 
-    temperaturesHaveErrored() {
+    atmospheresHaveErrored() {
         this.setState({
             hasErrored: true
         });
@@ -169,25 +168,29 @@ class TemperatureChart extends Component {
         return (dispatch) => {
             setTimeout(() => {
                 // This function is able to dispatch other action creators
-                dispatch(this.temperaturesHaveErrored());
+                dispatch(this.atmospheresHaveErrored());
             }, 5000);
         };
     }
 
     /**
-     * Convert the temperatures received from server to exploitable data for the graphs
+     * Convert the atmospheres received from server to exploitable data for the graphs
      *
-     * @param temperatures = the temperatures received from server
+     * @param atmospheres = the atmospheres received from server
      */
-    static valueToChart(temperatures) {
+    static valueToChart(atmospheres,gas) {
         let chartData = [];
-        let chartPoint = {temperature: 0};
-        //Checks that temperatures have values
-        if(temperatures && temperatures.length > 0) {
-            //Iterate through the temperatures
-            for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
-                chartPoint.temperature = Math.round( temperatures[tempIndex].value * 10) / 10;
-                chartData.push(chartPoint.temperature);
+        let chartPoint = {atmosphere: 0};
+        //Checks that atmospheres have values
+        if(atmospheres && atmospheres.length > 0) {
+            //Iterate through the atmospheres
+            for (let atmosIndex = 0; atmosIndex < atmospheres.length; atmosIndex++) {
+                if(gas == 1){
+                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].co * 10) / 10;
+                }else if(gas == 2){
+                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].no2 * 10) / 10;
+                }
+                chartData.push(chartPoint.atmosphere);
             }
         }
         return chartData;
@@ -196,15 +199,15 @@ class TemperatureChart extends Component {
     /**
      * Convert the dates received from server to exploitable data for the graphs
      *
-     * @param temperatures = the [] of temperatures received from server
+     * @param atmospheres = the [] of atmospheres received from server
      */
     static datesToChart(array,period) {
         let chartData = [];
         let chartPoint = {date: '0'};
-        //Checks that temperatures have values
+        //Checks that atmospheres have values
 
         if(array && array.length > 0) {
-            //Iterate through the temperatures
+            //Iterate through the atmospheres
             for (let dateIndex = 0; dateIndex < array.length; dateIndex++) {
                 switch(period){
                     case 'year':
@@ -229,22 +232,23 @@ class TemperatureChart extends Component {
     }
 
     render() {
-        if(this.state.temperatures && this.state.temperatures[0] && !this.state.isLoading) {
+        if(this.state.co && this.state.no2 && this.state.no2[0] && this.state.co[0] && !this.state.isLoading) {
             return (
                 <View style={this.chartStyle}>
+                    <Switch/>
                     <View style={this.headerStyle}>
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                        <MeanValue values={this.state.temperatures} unit="°C"/>
+                        <MeanValue values={this.state.co} unit="ppm"/>
                     </View>
                     <View style={ { height:300,width:350,flexDirection: 'row' } }>
-                        <YAxis dataPoints={this.state.temperatures} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
-                        <AreaChart dataPoints={this.state.temperatures}
+                        <YAxis dataPoints={this.state.co} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ppm`}/>
+                        <AreaChart dataPoints={this.state.co}
                                    style={chartOptions}
                                    contentInset={ this.contentInset}
                                    curve={shape.curveNatural}
                                    renderGradient={ ({ id }) => (
                                        <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
-                                           <Stop offset={ '0%' } stopColor={ 'rgb(233, 86, 95)' } stopOpacity={ 0.8 }/>
+                                           <Stop offset={ '0%' } stopColor={ 'rgb(95, 86, 233)' } stopOpacity={ 0.8 }/>
                                            <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
                                        </LinearGradient>
                                    ) }
@@ -256,12 +260,12 @@ class TemperatureChart extends Component {
                 </View>
             );
         } else {
-            return(<UndefinedChart period={this.props.period} data={"temperatures"}/>);
+            return(<UndefinedChart period={this.props.period} data={"atmospheres"}/>);
         }
     }
 }
 
-TemperatureChart.propTypes = {
+AtmosphereChart.propTypes = {
     room: PropTypes.string.isRequired,
     period: PropTypes.string.isRequired,
     fetchingDate: PropTypes.string.isRequired,
@@ -271,4 +275,4 @@ TemperatureChart.propTypes = {
     admin: PropTypes.bool,
 };
 
-export default TemperatureChart;
+export default AtmosphereChart;

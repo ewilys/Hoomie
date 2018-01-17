@@ -1,5 +1,6 @@
 /**
  Created by Guillaume Ferron on the 12/13/2017
+ Modified by Lisa Martini since 01/15/2018
  **/
 
 import React, { Component } from 'react';
@@ -103,7 +104,7 @@ class UndefinedChart extends Component {
         return (
             <View style={this.chartStyle}>
                 <View style={this.headerStyle}>
-                    <Text style={this.chartTitleStyle}>No temperatures available for this {this.props.period} </Text>
+                    <Text style={this.chartTitleStyle}>No {this.props.data} available for this {this.props.period} </Text>
                 </View>
                 <View style={{height:300,width:350,flexDirection:'row'}}>
                     <YAxis  dataPoints={this.undefinedValues} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
@@ -129,6 +130,7 @@ class UndefinedChart extends Component {
 
 UndefinedChart.propTypes = {
     period: PropTypes.string.isRequired,
+    data: PropTypes.string.isRequired,
 };
 
 export default UndefinedChart;

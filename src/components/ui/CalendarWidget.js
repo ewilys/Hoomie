@@ -1,5 +1,5 @@
 /**
- Created by Guillaume Ferron on the 12/15/2017
+ Created by Lisa Martini the 01/15/2018
  **/
 
 import React, { Component } from 'react';
