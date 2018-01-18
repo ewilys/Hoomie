@@ -15,7 +15,7 @@ import {colors} from './utils/constants';
 
 const AppDrawer = DrawerNavigator({
     Home: {
-        screen: HomeScreen,
+        screen: (props)=><HomeScreen {...props.navigation.state.params} admin={true}/>,
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Hoomie',
             drawerIcon: ({tintColor}) => (
