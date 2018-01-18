@@ -57,9 +57,6 @@ class University extends Component {
                 <View style={this.headerUniversityStyle}>
                     <Picker style={{width: 200}} itemStyle={{fontSize: 15, fontWeight: '100'}} selectedValue={this.state.room} onValueChange={(itemValue, itemIndex) => this.setState({room: itemValue})} mode='dropdown'>
                         <Picker.Item label="All Rooms" value="all" />
-                        <Picker.Item label="Room 203" value="203" />
-                        <Picker.Item label="Room 204" value="204" />
-                        <Picker.Item label="Room 205" value="205" />
                     </Picker>
                     <CalendarWidget onDateChange={this._onDateChange.bind(this)} currentDate={this.state.date}/>
                 </View>
@@ -77,7 +74,6 @@ class University extends Component {
                     </View>
                     :
                     <View style={this.displayStyle}>
-                        <TemperatureChart admin={true} period="year" fetchingDate={this.state.date} room={this.state.room} chartTitle={this.state.date.split("-")[0] + " Temperatures"} subparameters={{period: "year"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
                         <TemperatureChart admin={true} period="month" fetchingDate={this.state.date}  room={this.state.room} chartTitle={getMonthAsStr(this.state.date) + " Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
                         <TemperatureChart admin={true} period="day" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date)+" "+getDayAsStr(this.state.date)+"  Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
                     </View>
