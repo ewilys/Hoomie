@@ -160,7 +160,9 @@ class AtmosphereChart extends Component {
     }
 
     atmospheresFetchSuccess(atmospheres, subparameters) {
+
         atmospheres.data.sort((a,b)=> {return parseInt(a.date)-parseInt(b.date)});
+        //console.log(atmospheres.data);
         if(this.props.room == "all"){
             this.setState({
                 co: AtmosphereChart.valueToChart(atmospheres.data,1),
@@ -223,7 +225,7 @@ class AtmosphereChart extends Component {
                 if(gas == 1){
                     chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].co * 10) / 10;
                 }else if(gas == 2){
-                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].no2 * 10) / 10;
+                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].no2 * 100) / 100;
                 }
                 chartData.push(chartPoint.atmosphere);
             }
@@ -268,6 +270,7 @@ class AtmosphereChart extends Component {
 
     render() {
         if(this.state.co && this.state.no2 && this.state.no2[0] && this.state.co[0] && !this.state.isLoading && this.state.displayChart) {
+
             return (
                 <View style={this.chartStyle}>
                     <View style={this.headerToggle}>
