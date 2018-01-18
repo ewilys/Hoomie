@@ -25,7 +25,7 @@ const StudentDrawer = DrawerNavigator({
         })
     },
     Monitoring: {
-        screen: Monitoring,
+        screen: (props=><Monitoring {...props} admin={false}/>),
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Monitoring',
             drawerIcon: ({tintColor}) => (
@@ -79,7 +79,7 @@ const UniversityDrawer = DrawerNavigator({
         })
     },
     Monitoring: {
-        screen: Monitoring,
+        screen:  (props=><Monitoring {...props} admin={true}/>),
         navigationOptions: ({navigation}) => ({
             drawerLabel: 'Room Monitoring',
             drawerIcon: ({tintColor}) => (
