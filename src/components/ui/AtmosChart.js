@@ -223,7 +223,7 @@ class AtmosphereChart extends Component {
                 if(gas == 1){
                     chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].co * 10) / 10;
                 }else if(gas == 2){
-                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].no2 * 10) / 10;
+                    chartPoint.atmosphere = Math.round( atmospheres[atmosIndex].no2 * 100) / 100;
                 }
                 chartData.push(chartPoint.atmosphere);
             }
