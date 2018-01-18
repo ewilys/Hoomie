@@ -47,7 +47,7 @@ const StudentDrawer = DrawerNavigator({
 }, {
     contentComponent: props =>
         (<CustomDrawerContent
-            {...props}
+            {...props} univ={false}
         />),
     contentOptions: {
         activeBackgroundColor: colors.HOOMIE_COLOR,
@@ -101,7 +101,7 @@ const UniversityDrawer = DrawerNavigator({
 }, {
     contentComponent: props =>
         (<CustomDrawerContent
-            {...props}
+            {...props} univ={true}
         />),
     contentOptions: {
         activeBackgroundColor: colors.HOOMIE_COLOR,
@@ -111,28 +111,6 @@ const UniversityDrawer = DrawerNavigator({
 });
 
 
-const LoggedInStack = StackNavigator({
-    UnivStack: {screen: UniversityDrawer},
-    StudStack:{screen:StudentDrawer},
-}, {
-    navigationOptions: ({navigation}) => ({
-        tabBarVisible: false,
-        headerStyle: {
-            elevation: 0,
-            padding: 10
-        },
-        headerTitleStyle: {
-            color: colors.HOOMIE_COLOR,
-            fontWeight: '100'
-        },
-        headerLeft: <MaterialIcons name='menu' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerOpen')}/>,
-        headerRight:<MaterialIcons name='account-circle' size={30} color={colors.HOOMIE_COLOR} onPress={() => {}}/>
-
-    }),
-});
-
-const toUnivStack=()=>{NavigationActions.navigate({routeName:'UnivStack',index:0})};
-const toStudStack=()=>{NavigationActions.navigate({routeName:'StudStack',index:0})};
 
 const Navigator = StackNavigator({
     UnivStack: {screen: UniversityDrawer},
@@ -150,7 +128,7 @@ const Navigator = StackNavigator({
         },
         initialRouteName:'UnivStack',
         headerLeft: <MaterialIcons name='menu' size={30} color={colors.HOOMIE_COLOR} onPress={() => navigation.navigate('DrawerOpen')}/>,
-        headerRight:<MaterialIcons name='account-circle' size={30} color={colors.HOOMIE_COLOR} onPress={() =>  navigation.navigate({routeName:'StudStack',index:1})}/>
+
     }),
 });
 

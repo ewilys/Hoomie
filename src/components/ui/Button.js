@@ -3,8 +3,8 @@ import { withTheme } from 'styled-components';
 import styled from 'styled-components/native';
 
 const ButtonContainer = styled.TouchableHighlight`
-  width: 130;
-  height: 40;
+  height: 50;
+  width: 280;
   backgroundColor: ${props=> props.theme.HOOMIE_100};
   borderRadius: 5;
   justifyContent: center;

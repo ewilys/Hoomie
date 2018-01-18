@@ -15,7 +15,7 @@ class HomeScreen extends Component {
             date: getCurrentDay(),
             greeting : getGreeting(),
             updates:true,
-            admin : true,
+           // admin : true,
 
         }
 
@@ -34,16 +34,7 @@ class HomeScreen extends Component {
     }
 
 
-    componentDidMount(){
-        this.setState({admin:this.props.admin});
-    }
-    componentDidUpdate(){
-        if(this.props.navigation.state.params.admin && this.state.updates){
-            this.setState({admin:!this.state.admin,
-            updates: false});
-        }
 
-    }
     _onDateChange(date) {
 
         this.setState({
@@ -55,7 +46,7 @@ class HomeScreen extends Component {
         return (
             <ScrollView style={screenStyle}>
                 <UserHeader onDateChange={this._onDateChange.bind(this)} currentDate={this.state.date}/>
-                {this.state.admin ?
+                {this.props.admin ?
                     <View style={this.displayStyle}>
                         <Text style={this.textStyle}> Good {this.state.greeting}, administrator </Text>
                         <Advice content="You should consider to heat up Residence E one hour sooner in the morning "/>

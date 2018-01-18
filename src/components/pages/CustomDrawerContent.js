@@ -39,18 +39,31 @@ const ViewContainer = styled.View`
 const CustomDrawerContent = (props) => (
     <ContainerView>
         <DrawerContainer>
+
             <AvatarContainer>
-                <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/university.png')}/>
+                {props.univ ?
+                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/university.png')}/>
+                    :
+                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/student.jpg')}/>
+                }
             </AvatarContainer>
             <ViewContainer>
-                <Text > DirPat Insa Lyon </Text>
+                {props.univ ?
+                    <Text> DirPat Insa Lyon </Text>
+                    :
+                    <Text> Luke Skywalker, room 204 </Text>
+                }
             </ViewContainer>
             <ItemContainer>
                 <DrawerItems {...props} />
             </ItemContainer>
         </DrawerContainer>
         <ButtonContainer>
-            <Button text="Logout" onPress={() => props.navigation.navigate('StudStack')}/>
+            {props.univ ?
+                <Button text="Switch to Student Account" onPress={() => props.navigation.navigate('StudStack')}/>
+                :
+                <Button text="Switch to University Account" onPress={() => props.navigation.navigate('UnivStack')}/>
+            }
         </ButtonContainer>
     </ContainerView>
 );
