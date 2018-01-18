@@ -50,7 +50,7 @@ const CustomDrawerContent = (props) => (
             </ItemContainer>
         </DrawerContainer>
         <ButtonContainer>
-            <Button text="Logout" onPress={() => props.navigation.navigate('Welcome')}/>
+            <Button text="Logout" onPress={() => props.navigation.navigate('StudStack')}/>
         </ButtonContainer>
     </ContainerView>
 );
