@@ -4,7 +4,7 @@
  **/
 
 import React, { Component } from 'react';
-import {Text, View} from "react-native";
+import {Text, View,Image} from "react-native";
 import PropTypes from 'prop-types';
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {
@@ -26,7 +26,7 @@ class TemperatureChart extends Component {
             temperatures: [],
             dates:[],
             rooms:['203','204','205'],
-            colors:['#FF9933','#FF3333','#FF6666'],
+            colors:['rgb(138, 0, 230, 0.8)', 'rgb(173, 51, 255, 0.8)', 'rgb(194, 102, 255, 0.8)'],
             isLoading: false,
             hasErrored: false,
             updates : false,
@@ -60,6 +60,16 @@ class TemperatureChart extends Component {
             bottom:30,
         };
 
+        this.legendStyle={
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'center',
+            alignItems:'center',
+        }
+        this.rectangleStyle={
+            width:100,
+            height:50,
+        }
 
         this.updatedChartOptions = chartOptions;
         // this.updatedChartOptions.width = Dimensions.get('window').width - 10;
@@ -199,16 +209,42 @@ class TemperatureChart extends Component {
         let chartData = [];
         let chartPoint = {'203': 0,'204':0,'205':0};
         //Checks that temperatures have values
-        if(temperatures && temperatures.length > 0) {
+        /*if(temperatures && temperatures.length > 0) {
             //Iterate through the temperatures
             for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
-                chartPoint["203"] = Math.round( temperatures[tempIndex]["205"] * 10) / 10;
+                chartPoint["203"] = Math.round( temperatures[tempIndex]["203"] * 10) / 10;
                 chartPoint["204"] = Math.round( temperatures[tempIndex]["204"] * 10) / 10;
                 chartPoint["205"] = Math.round( temperatures[tempIndex]["205"] * 10) / 10;
-
+                let chartPoint = {'203': temperatures[tempIndex]["203"] ,'204':temperatures[tempIndex]["204"] ,'205':temperatures[tempIndex]["205"] };
                 chartData.push(chartPoint);
             }
-        }
+        }*/
+        chartData = [
+            {
+
+                '203': 3840,
+                '204': 1920,
+                '205': 960,
+
+            },
+            {
+
+                '203': 1600,
+                '204': 1440,
+                '205': 960,
+
+            },
+            {
+                '203': 640,
+                '204': 960,
+                '205': 3640,
+            },
+            {
+                '203': 3320,
+                '204': 480,
+                '205': 640,
+            },
+        ]
         return chartData;
     }
 
@@ -277,6 +313,7 @@ class TemperatureChart extends Component {
                     {this.props.room == "all" ?
 
                         <View style={ { height:300,width:350,flexDirection: 'row' } }>
+                            <Image style={{height:300,marginTop: 10,marginBottom:30,marginRight:5}} source={require('../../../assets/images/yaxis.png')}/>
                             <View >
                                 <StackedAreaChart data={this.state.temperatures}
                                                   keys={ this.state.rooms}
@@ -287,8 +324,11 @@ class TemperatureChart extends Component {
                                            showGrid={false}
 
                                 />
+
                             </View>
+
                         </View>
+
                         :
                         <View style={ { height:300,width:350,flexDirection: 'row' } }>
                             <YAxis dataPoints={this.state.temperatures} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
@@ -320,7 +360,12 @@ class TemperatureChart extends Component {
                         </View>
                     }
                     <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
-
+                    {this.props.room == "all" &&
+                    <View style={this.legendStyle}>
+                        <View style={[this.rectangleStyle,{color:'rgb(138, 0, 230, 0.8)'}]}></View><Text> room 203 </Text>
+                        <View style={[this.rectangleStyle,{color:'rgb(173, 51, 255, 0.8)'}]}></View><Text> room 204 </Text>
+                        <View style={[this.rectangleStyle,{color:'rgb(194, 102, 255, 0.8)'}]}></View><Text> room 205 </Text>
+                    </View>}
                 </View>
             );
         } else if(!this.state.displayChart){
