@@ -51,7 +51,7 @@ const CustomDrawerContent = (props) => (
                 {props.univ ?
                     <Text> DirPat Insa Lyon </Text>
                     :
-                    <Text> Luke Skywalker, room 204 </Text>
+                    <Text> Michelle Grande, room 204 </Text>
                 }
             </ViewContainer>
             <ItemContainer>
