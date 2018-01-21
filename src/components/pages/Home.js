@@ -48,7 +48,7 @@ class HomeScreen extends Component {
                 <UserHeader onDateChange={this._onDateChange.bind(this)} currentDate={this.state.date}/>
                 {this.props.admin ?
                     <View style={this.displayStyle}>
-                        <Text style={this.textStyle}> Good {this.state.greeting}, administrator </Text>
+                        <Text style={this.textStyle}> Good {this.state.greeting}, Jean-Luc </Text>
                         <Advice content="You should consider heating up the residency E 1 hour sooner in the morning, students are cold !"/>
                         <Advice content="The pollution level in residency G is above the mean value, you might want to have the airing system checked."/>
 
