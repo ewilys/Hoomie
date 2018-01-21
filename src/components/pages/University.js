@@ -74,6 +74,7 @@ class University extends Component {
                     </View>
                     :
                     <View style={this.displayStyle}>
+                        <TemperatureChart admin={true} period="month" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date)+"  Temperatures"} subparameters={{period: "month"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
                         <TemperatureChart admin={true} period="day" fetchingDate={this.state.date} room={this.state.room} chartTitle={getMonthAsStr(this.state.date)+" "+getDayAsStr(this.state.date)+"  Temperatures"} subparameters={{period: "day"}} homeRefreshing={this.state.isRefreshing} homeRefreshed={this.hasRefreshed.bind(this)}/>
                     </View>
                 }

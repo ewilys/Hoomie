@@ -360,12 +360,7 @@ class TemperatureChart extends Component {
                         </View>
                     }
                     <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
-                    {this.props.room == "all" &&
-                    <View style={this.legendStyle}>
-                        <View style={[this.rectangleStyle,{color:'rgb(138, 0, 230, 0.8)'}]}></View><Text> room 203 </Text>
-                        <View style={[this.rectangleStyle,{color:'rgb(173, 51, 255, 0.8)'}]}></View><Text> room 204 </Text>
-                        <View style={[this.rectangleStyle,{color:'rgb(194, 102, 255, 0.8)'}]}></View><Text> room 205 </Text>
-                    </View>}
+
                 </View>
             );
         } else if(!this.state.displayChart){

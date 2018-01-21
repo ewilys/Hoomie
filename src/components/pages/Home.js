@@ -49,7 +49,7 @@ class HomeScreen extends Component {
                 {this.props.admin ?
                     <View style={this.displayStyle}>
                         <Text style={this.textStyle}> Good {this.state.greeting}, administrator </Text>
-                        <Advice content="You should consider to heat up Residence E one hour sooner in the morning "/>
+                        <Advice content="You should consider heating up Residence E one hour sooner in the morning "/>
                         <Advice content="It seems that pollution level in Residence G is too high , you might take a look at your airing system"/>
 
                     </View>
