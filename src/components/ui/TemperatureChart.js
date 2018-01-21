@@ -31,6 +31,7 @@ class TemperatureChart extends Component {
             hasErrored: false,
             updates : false,
             displayChart :false,
+            yaxis:[15,20,22,24,23.5],
         };
 
         this.chartStyle = {
@@ -60,16 +61,7 @@ class TemperatureChart extends Component {
             bottom:30,
         };
 
-        this.legendStyle={
-            flex:1,
-            flexDirection:'row',
-            justifyContent:'center',
-            alignItems:'center',
-        }
-        this.rectangleStyle={
-            width:100,
-            height:50,
-        }
+
 
         this.updatedChartOptions = chartOptions;
         // this.updatedChartOptions.width = Dimensions.get('window').width - 10;
@@ -219,32 +211,12 @@ class TemperatureChart extends Component {
                 chartData.push(chartPoint);
             }
         }*/
-        chartData = [
-            {
+            chartData = [{'203': 23,'204': 19,'205': 21,},
+                {'203': 24,'204': 18,'205': 20,},
+                {'203': 23,'204': 5,'205': 4,},
+                { '203': 22,'204': 2,'205': 1,},]
 
-                '203': 3840,
-                '204': 1920,
-                '205': 960,
 
-            },
-            {
-
-                '203': 1600,
-                '204': 1440,
-                '205': 960,
-
-            },
-            {
-                '203': 640,
-                '204': 960,
-                '205': 3640,
-            },
-            {
-                '203': 3320,
-                '204': 480,
-                '205': 640,
-            },
-        ]
         return chartData;
     }
 
@@ -313,7 +285,8 @@ class TemperatureChart extends Component {
                     {this.props.room == "all" ?
 
                         <View style={ { height:300,width:350,flexDirection: 'row' } }>
-                            <Image style={{height:300,marginTop: 10,marginBottom:30,marginRight:5}} source={require('../../../assets/images/yaxis.png')}/>
+                             <YAxis dataPoints={this.state.yaxis} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
+
                             <View >
                                 <StackedAreaChart data={this.state.temperatures}
                                                   keys={ this.state.rooms}
@@ -360,8 +333,8 @@ class TemperatureChart extends Component {
                         </View>
                     }
                     <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
-
                 </View>
+
             );
         } else if(!this.state.displayChart){
             return null;
