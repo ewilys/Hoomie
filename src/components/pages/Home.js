@@ -49,15 +49,15 @@ class HomeScreen extends Component {
                 {this.props.admin ?
                     <View style={this.displayStyle}>
                         <Text style={this.textStyle}> Good {this.state.greeting}, administrator </Text>
-                        <Advice content="You should consider heating up Residence E one hour sooner in the morning "/>
-                        <Advice content="It seems that pollution level in Residence G is too high , you might take a look at your airing system"/>
+                        <Advice content="Vous devriez pensez à chauffer la résidence E 1 heure plus tôt le matin, certains étudiants ont froid !"/>
+                        <Advice content="Le niveau de pollution dans la résidence G est plus haut que la moyenne, vous devriez faire vérifier la ventilation !"/>
 
                     </View>
                 :
                     <View style={this.displayStyle}>
                         <Text style={this.textStyle}> Good {this.state.greeting}, Luke </Text>
-                        <Advice content="Do you know that if you lower your heater temperature by 1°C during the night, you'll save 7% on your energy bill ?"/>
-                        <Advice content="Hey ! You forgot to close your window today !"/>
+                        <Advice content="Savais tu que si tu baisses le chauffage de 1°C pendant la nuit, tu peux économiser jusqu'à 7% sur ta facture ?"/>
+                        <Advice content="Hey ! Tu as oublié de fermer la fenêtre !"/>
 
                     </View>
                 }
