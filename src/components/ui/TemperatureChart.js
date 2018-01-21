@@ -26,7 +26,7 @@ class TemperatureChart extends Component {
             temperatures: [],
             dates:[],
             rooms:['203','204','205'],
-            colors:['rgb(138, 0, 230, 0.8)', 'rgb(173, 51, 255, 0.8)', 'rgb(194, 102, 255, 0.8)'],
+            colors:['rgb(233, 86, 95)', 'rgb(239, 136, 143)', 'rgb(246, 187, 191)'],
             isLoading: false,
             hasErrored: false,
             updates : false,
