@@ -276,3 +276,17 @@ export function dateToString(date){
     d += date.day;
     return d;
 }
+export function getGreeting() {
+    var d = new Date();
+    var h = d.getHours();
+
+    if(h > 4 && h < 12){
+        return "morning";
+    }else if(h>=12 && h <17){
+        return "afternoon";
+    }else if (h>=17 && h < 21){
+        return "evening";
+    }else{
+        return "night";
+    }
+}

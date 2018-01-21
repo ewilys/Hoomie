@@ -1,7 +1,7 @@
 import React from 'react';
 import {DrawerItems} from 'react-navigation';
 import styled from 'styled-components/native';
-import { Image } from 'react-native';
+import { Image,Text,View } from 'react-native';
 
 import Button from '../ui/Button';
 
@@ -29,18 +29,41 @@ const ButtonContainer = styled.View`
   alignItems: center;
 `;
 
+const ViewContainer = styled.View`
+  flex: 1;
+  justifyContent: center;
+  alignItems: center;
+`;
+
+
 const CustomDrawerContent = (props) => (
     <ContainerView>
         <DrawerContainer>
+
             <AvatarContainer>
-                <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/High-Definition-Ultra-HD-Wallpaper-96262544.jpg')}/>
+                {props.univ ?
+                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/university.png')}/>
+                    :
+                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/student.jpg')}/>
+                }
             </AvatarContainer>
+            <ViewContainer>
+                {props.univ ?
+                    <Text> DirPat Insa Lyon </Text>
+                    :
+                    <Text> Luke Skywalker, room 204 </Text>
+                }
+            </ViewContainer>
             <ItemContainer>
                 <DrawerItems {...props} />
             </ItemContainer>
         </DrawerContainer>
         <ButtonContainer>
-            <Button text="Logout" onPress={() => props.navigation.navigate('Welcome')}/>
+            {props.univ ?
+                <Button text="Switch to Student Account" onPress={() => props.navigation.navigate('StudStack')}/>
+                :
+                <Button text="Switch to University Account" onPress={() => props.navigation.navigate('UnivStack')}/>
+            }
         </ButtonContainer>
     </ContainerView>
 );

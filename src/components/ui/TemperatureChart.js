@@ -4,7 +4,7 @@
  **/
 
 import React, { Component } from 'react';
-import {Text, View} from "react-native";
+import {Text, View,Image} from "react-native";
 import PropTypes from 'prop-types';
 import {chartOptions, colors, serverIp} from "../../utils/constants"
 import {
@@ -12,7 +12,7 @@ import {
     getMonthAsShortStr
 } from "../../utils/methods"
 import MeanValue from "./MeanValue";
-import { AreaChart, YAxis,XAxis } from 'react-native-svg-charts';
+import { AreaChart, YAxis,XAxis, StackedAreaChart } from 'react-native-svg-charts';
 import * as shape from 'd3-shape'
 import UndefinedChart from "./UndefinedChart";
 import {LinearGradient, Stop,Circle} from "react-native-svg";
@@ -25,10 +25,13 @@ class TemperatureChart extends Component {
         this.state={
             temperatures: [],
             dates:[],
+            rooms:['203','204','205'],
+            colors:['rgb(233, 86, 95)', 'rgb(239, 136, 143)', 'rgb(246, 187, 191)'],
             isLoading: false,
             hasErrored: false,
             updates : false,
             displayChart :false,
+            yaxis:[15,20,22,24,23.5],
         };
 
         this.chartStyle = {
@@ -57,6 +60,7 @@ class TemperatureChart extends Component {
             top:30,
             bottom:30,
         };
+
 
 
         this.updatedChartOptions = chartOptions;
@@ -148,9 +152,10 @@ class TemperatureChart extends Component {
     temperaturesFetchSuccess(temperatures, subparameters) {
 
         temperatures.data.sort((a,b)=> {return parseInt(a.date)-parseInt(b.date)});
+
         if(this.props.room == "all"){
             this.setState({
-                temperatures: TemperatureChart.valueToChart(temperatures.data),
+                temperatures: TemperatureChart.allValueToChart(temperatures.data),
                 dates: TemperatureChart.datesToChart(temperatures.data,this.props.period),
                 isLoading: false,
                 hasErrored: false,
@@ -165,7 +170,7 @@ class TemperatureChart extends Component {
                 displayChart : true,
             });
         }
-
+        console.log(this.state.temperatures);
         this.props.homeRefreshed();
     }
 
@@ -190,6 +195,29 @@ class TemperatureChart extends Component {
                 dispatch(this.temperaturesHaveErrored());
             }, 5000);
         };
+    }
+
+    static allValueToChart(temperatures){
+        let chartData = [];
+        let chartPoint = {'203': 0,'204':0,'205':0};
+        //Checks that temperatures have values
+        /*if(temperatures && temperatures.length > 0) {
+            //Iterate through the temperatures
+            for (let tempIndex = 0; tempIndex < temperatures.length; tempIndex++) {
+                chartPoint["203"] = Math.round( temperatures[tempIndex]["203"] * 10) / 10;
+                chartPoint["204"] = Math.round( temperatures[tempIndex]["204"] * 10) / 10;
+                chartPoint["205"] = Math.round( temperatures[tempIndex]["205"] * 10) / 10;
+                let chartPoint = {'203': temperatures[tempIndex]["203"] ,'204':temperatures[tempIndex]["204"] ,'205':temperatures[tempIndex]["205"] };
+                chartData.push(chartPoint);
+            }
+        }*/
+            chartData = [{'203': 23,'204': 19,'205': 21,},
+                {'203': 24,'204': 18,'205': 20,},
+                {'203': 23,'204': 5,'205': 4,},
+                { '203': 22,'204': 2,'205': 1,},]
+
+
+        return chartData;
     }
 
     /**
@@ -252,39 +280,61 @@ class TemperatureChart extends Component {
                 <View style={this.chartStyle}>
                     <View style={this.headerStyle}>
                         <Text style={this.chartTitleStyle}>{this.props.chartTitle ? this.props.chartTitle : ''}</Text>
-                        <MeanValue values={this.state.temperatures} unit="°C"/>
+                        {this.props.room != "all" && <MeanValue values={this.state.temperatures} unit="°C"/>}
                     </View>
-                    <View style={ { height:300,width:350,flexDirection: 'row' } }>
-                        <YAxis dataPoints={this.state.temperatures} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
-                        <View >
-                            <AreaChart dataPoints={this.state.temperatures}
-                                       style={chartOptions}
-                                       contentInset={ this.contentInset}
-                                       curve={shape.curveNatural}
-                                       renderGradient={ ({ id }) => (
-                                           <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
-                                               <Stop offset={ '0%' } stopColor={ 'rgb(233, 86, 95)' } stopOpacity={ 0.8 }/>
-                                               <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
-                                           </LinearGradient>
-                                       ) }
-                                       showGrid={false}
-                                       renderDecorator={ ({ x, y, index, value }) => (
-                                           <Circle
-                                               key={ index }
-                                               cx={ x(index) }
-                                               cy={ y(value) }
-                                               r={ 3 }
-                                               stroke={ 'rgb(233, 86, 95)' }
-                                               fill={ 'white' }
-                                           />
-                                       ) }
-                            />
+                    {this.props.room == "all" ?
+
+                        <View style={ { height:300,width:350,flexDirection: 'row' } }>
+                             <YAxis dataPoints={this.state.yaxis} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
+
+                            <View >
+                                <StackedAreaChart data={this.state.temperatures}
+                                                  keys={ this.state.rooms}
+                                           style={chartOptions}
+                                           contentInset={ this.contentInset}
+                                           curve={shape.curveNatural}
+                                           colors={this.state.colors}
+                                           showGrid={false}
+
+                                />
+
+                            </View>
 
                         </View>
-                    </View>
-                    <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
 
+                        :
+                        <View style={ { height:300,width:350,flexDirection: 'row' } }>
+                            <YAxis dataPoints={this.state.temperatures} contentInset={{top:30,bottom:10}} labelStyle={{color:'grey'}} formatLabel={value => `${value}ºC`}/>
+                            <View >
+                                <AreaChart dataPoints={this.state.temperatures}
+                                           style={chartOptions}
+                                           contentInset={ this.contentInset}
+                                           curve={shape.curveNatural}
+                                           renderGradient={ ({ id }) => (
+                                               <LinearGradient id={ id } x1={ '0%' } y={ '0%' } x2={ '0%' } y2={ '100%' }>
+                                                   <Stop offset={ '0%' } stopColor={ 'rgb(233, 86, 95)' } stopOpacity={ 0.8 }/>
+                                                   <Stop offset={ '100%' } stopColor={ 'rgb(255, 255, 255)' } stopOpacity={ 0.2 }/>
+                                               </LinearGradient>
+                                           ) }
+                                           showGrid={false}
+                                           renderDecorator={ ({ x, y, index, value }) => (
+                                               <Circle
+                                                   key={ index }
+                                                   cx={ x(index) }
+                                                   cy={ y(value) }
+                                                   r={ 3 }
+                                                   stroke={ 'rgb(233, 86, 95)' }
+                                                   fill={ 'white' }
+                                               />
+                                           ) }
+                                />
+
+                            </View>
+                        </View>
+                    }
+                    <XAxis values={this.state.dates}  formatLabel={value=> value} contentInset={this.contentInset} labelStyle={{color:'grey'}} chartType={XAxis.Type.BAR}/>
                 </View>
+
             );
         } else if(!this.state.displayChart){
             return null;
