@@ -23,6 +23,8 @@ Improvements possible :
 
 
 
+Do not forget to run : npm install 
+
 
 ## Starting the app :
 Before starting anything, make sure you have adb installed on your computer. If not, download the adb installer [here](https://dl.google.com/android/repository/platform-tools-latest-windows.zip) and follow the steps.
