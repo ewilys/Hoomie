@@ -44,14 +44,14 @@ const CustomDrawerContent = (props) => (
                 {props.univ ?
                     <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/university.png')}/>
                     :
-                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/lisaphoto.jpg')}/>
+                    <Image style={{width: 100, height: 100, borderRadius: 60}} source={require('../../../assets/images/student.jpg')}/>
                 }
             </AvatarContainer>
             <ViewContainer>
                 {props.univ ?
                     <Text> DirPat Insa Lyon </Text>
                     :
-                    <Text> Michelle Grande, room 204 </Text>
+                    <Text> Luke Skywalker , room 204 </Text>
                 }
             </ViewContainer>
             <ItemContainer>

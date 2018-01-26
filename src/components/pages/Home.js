@@ -55,7 +55,7 @@ class HomeScreen extends Component {
                     </View>
                 :
                     <View style={this.displayStyle}>
-                        <Text style={this.textStyle}> Good {this.state.greeting}, Michelle </Text>
+                        <Text style={this.textStyle}> Good {this.state.greeting}, Luke </Text>
                         <Advice content="Did you know that if you lower the temperature by 1°C at night, you can save up to 7% on your energy bill ?"/>
                         <Advice content="Hey ! You forgot to close the window !"/>
 
